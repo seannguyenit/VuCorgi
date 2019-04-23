@@ -1,0 +1,46 @@
+﻿@model Category[]
+
+<div>
+    <hr>
+    <div class="col-md-12 col-lg-12">
+        <div align="center" class="div_service_table">
+            <div class="row">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <div class="div_service_table_contain">
+                            <div class="div_service_table_item">
+                                <div>
+                                    <a href="@Url.Action("Chitiet","DanhMuc",new { id = item.Id })">
+                                        <img src="@item.FEPath" alt="@item.Name">
+                                    </a>
+                                </div>
+                            </div>
+                            <a class="div_service_table_item_text" href="@Url.Action("Chitiet","DanhMuc",new { id = item.Id })">@item.Name</a>
+                        </div>
+                    }
+                }
+
+            </div>
+            @*<div class="row">
+                    @{
+                        foreach (var item2 in Model.Skip(4).Take(4))
+                        {
+                            <div class="div_service_table_item">
+                                <div>
+                                    <a href="#">
+                                        <img src="@item.FEPath" alt=""> <br>
+                                        <p>@item.Name</p>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>*@
+        </div>
+    </div>
+    <hr>
+</div>
+<script>
+
+</script>

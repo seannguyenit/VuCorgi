@@ -1,0 +1,257 @@
+﻿@model MainLibrary.Entity.WebCenter.TaskWeb
+
+@{
+    ViewBag.Title = "TaskDetails";
+    Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+    string strDateEs = string.Empty;
+    string strTimeEs = string.Empty;
+    string strDateDe = string.Empty;
+    string strTimeDe = string.Empty;
+    if (Model.Estimate.HasValue)
+    {
+        strDateEs = Model.Estimate.Value.Date.ToString("dd/MM/yy");
+        strTimeEs = string.Format("{0:hh:mm tt}", Model.Estimate.Value);
+    }
+    if (Model.Deadline.HasValue)
+    {
+        strDateDe = Model.Deadline.Value.Date.ToString("dd/MM/yy");
+        strTimeDe = string.Format("{0:hh:mm tt}", Model.Deadline.Value);
+    }
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+                    <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Task Details </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="smart-form-register" action="@Url.Action("SaveTask", "Task")" method="POST" class="smart-form">
+                                @Html.ValidationBootstrap()
+                                @Html.HiddenFor(m => m.Id)
+                                <header>
+                                    @Model.Name
+                                </header>
+                                <fieldset>
+                                    <section>
+                                        <label class="label">Name</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-file-text"></i>
+                                            <input type="text" id="Name" name="Name" value="@Model.Name">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the name</b>
+                                        </label>
+                                    </section>
+
+                                    <section>
+                                        <label class="label">Description</label>
+                                        <div class="input">
+                                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "Description" })
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <label class="label">Cost</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-file-text"></i>
+                                            <input type="number" id="Cost" name="Cost" value="@Model.Cost" pattern="\d*" maxlength="12">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the bonus</b>
+                                        </label>
+                                    </section>
+                                </fieldset>
+                                <fieldset>
+                                    <section>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">Type:</label>
+                                            <div class="col-sm-11 input-group">
+                                                @Html.DropDownList("TypeId", (IEnumerable<SelectListItem>)ViewBag.Types, new { @class = "form-control", @placeholder = "Select Type" })
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                <fieldset>
+                                    <section>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">Taget user:</label>
+                                            <div class="col-sm-11 input-group">
+                                                @Html.DropDownList("UserId", (IEnumerable<SelectListItem>)ViewBag.Users, new { @class = "select2 select2-offscreen", @placeholder = "Select Taget User" })
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                <fieldset>
+                                    <section>
+                                        <div class="form-group">
+                                            <div class="input-group col-sm-12">
+                                                <label class="col-sm-4 control-label">Start Time: <span>@Model.StartTime</span></label>
+                                                <label class="col-sm-4 control-label">Finish Time: <span>@Model.FinishTime</span></label>
+                                                <label class="col-sm-4 control-label">Duration: <span>@Model.Duration</span>minutes</label>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                <fieldset>
+                                    <section>
+                                        <div class="form-group">
+                                            <label class="col-sn control-label">Estimated:</label>
+                                            <div class="form-group">
+                                                <div class="col-sm-12 input-group">
+                                                    <div class="col-sm-4 input-group" style="float:left">
+                                                        <input type="text" name="strDateEstimated" id="datepickerEstimated" placeholder="Select a date" class="form-control datepicker" data-dateformat="dd/mm/yy" value="@strDateEs">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    <div class="col-sm-3 input-group" style="float:left">
+                                                        <input class="form-control" name="strTimeEstimated" id="timepickerEstimated" type="text" placeholder="Select time" value="@strTimeEs">
+                                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label class="col-sn control-label" style="color:red">Deadline:</label>
+                                            <div class="form-group">
+                                                <div class="col-sm-12 input-group">
+                                                    <div class="col-sm-4 input-group" style="float:left">
+                                                        <input type="text" name="strDateDeadline" id="datepickerDeadline" placeholder="Select a date" class="form-control datepicker" data-dateformat="dd/mm/yy" value="@strDateDe">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                    <div class="col-sm-3 input-group" style="float:left">
+                                                        <input class="form-control" name="strTimeDeadline" id="timepickerDeadline" type="text" placeholder="Select time" value="@strTimeDe">
+                                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </fieldset>
+                                <fieldset>
+                                    <section>
+                                        <label class="checkbox">
+                                            @*<input type="checkbox" name="isEnable" id="IsEnable" checked="@entity.IsEnable">*@
+                                            @Html.CheckBox("IsUrgent", Model.IsUrgent)
+                                            <i></i>Urgent
+                                        </label>
+                                        @if (!Model.StartTime.HasValue)
+                                        {
+                                            <label class="checkbox" style="color:blue">
+                                                @*<input type="checkbox" name="isEnable" id="IsEnable" checked="@entity.IsEnable">*@
+                                                @Html.CheckBox("isStart", false)
+                                                <i></i>Start immediately
+                                            </label>
+                                        }
+                                    </section>
+                                </fieldset>
+                                <footer>
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                </footer>
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+            <!-- END COL -->
+        </div>
+        <!-- END ROW -->
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+@section pagespecific {
+    <script src="/scripts/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript">
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+        function changeDatetimeInvisible() {
+            var value = $('#datepickerEstimated').val();
+            if (value === '' || value === 'undefine' || value === null) {
+                $('#timepickerEstimated').parent().hide();
+            } else {
+                $('#timepickerEstimated').parent().show(500);
+            }
+            var value = $('#datepickerDeadline').val();
+            if (value === '' || value === 'undefine' || value === null) {
+                $('#timepickerDeadline').parent().hide();
+            } else {
+                $('#timepickerDeadline').parent().show(500);
+            }
+        }
+
+        $(document).ready(function () {
+            $('#timepickerDeadline').timepicker();
+            $('#timepickerEstimated').timepicker();
+            changeDatetimeInvisible();
+            $('#datepickerEstimated').change(function () {
+                changeDatetimeInvisible();
+            });
+            $('#datepickerDeadline').change(function () {
+                changeDatetimeInvisible();
+            });
+            var $registerForm = $("#smart-form-register").validate({
+
+                // Rules for form validation
+                rules: {
+                    Name: {
+                        required: true
+                    },
+                    Description: {
+                        required: true
+                    },
+                },
+
+                // Messages for form validation
+                messages: {
+                    Name: {
+                        required: 'Please enter title'
+                    },
+                    Description: {
+                        required: 'Please enter description'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+
+
+
+        })</script>
+}

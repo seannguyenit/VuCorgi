@@ -1,0 +1,98 @@
+﻿@model AccountLoginModel
+@{
+    ViewBag.PageId = "extr-page";
+    ViewBag.PageClass = "animated fadeInDown";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+@section topright{
+    <span id="extr-page-header-space"> <span class="hidden-mobile">Chưa có tài khoản ?</span> <a href="@Url.Action("register", "Art_account")" class="btn btn-danger">Đăng ký</a> </span>
+}
+    <div id="content" class="container">
+            @*<h1 class="txt-color-red login-header-big">Arthur SmartAdmin</h1>*@
+            <div class="row">
+
+                @{ Html.RenderPartial("_LoginText"); }
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                    <div class="well no-padding">
+                        <form action="@Url.Action("login", "Art_Account")" method="POST" id="login-form" class="smart-form client-form">
+                            <header>
+                                Sign In
+                            </header>
+                            @*@Html.HiddenFor(m => m.ReturnUrl)*@
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationBootstrap()
+                            <fieldset>
+                                <section>
+                                    <label class="label">Username</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="Username">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter username</b>
+                                    </label>
+                                </section>
+                                <section>
+                                    <label class="label">Password</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="password" name="password">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+                                    </label>
+                                    <div class="note">
+                                        <a href="@Url.Action("forgotpassword", "account")"><i class="fa fa-frown-o"></i> Forgot password?</a>
+                                    </div>
+                                </section>
+                                <section>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="rememberMe" value="true" checked="checked">
+                                        <input type="hidden" name="rememberMe" value="false" />
+                                        <i></i>Stay signed in
+                                    </label>
+                                </section>
+                            </fieldset>
+                            <footer>
+                                <button type="submit" class="btn btn-primary">
+                                    Sign in
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                    @*@{ Html.RenderPartial("_FESocialMedia"); }*@
+                </div>
+            </div>
+        </div>
+        @section pagespecific {
+            <script type="text/javascript">
+                $(function () {
+                    // Validation
+                    $("#login-form").validate({
+                        // Rules for form validation
+                        rules: {
+                            email: {
+                                required: true,
+                                email: true
+                            },
+                            password: {
+                                required: true,
+                                minlength: 3,
+                                maxlength: 20
+                            }
+                        },
+
+                        // Messages for form validation
+                        messages: {
+                            email: {
+                                required: 'Please enter your email address',
+                                email: 'Please enter a VALID email address'
+                            },
+                            password: {
+                                required: 'Please enter your password'
+                            }
+                        },
+
+                        // Do not change code below
+                        errorPlacement: function (error, element) {
+                            error.insertAfter(element.parent());
+                        }
+                    });
+                });</script>
+        }

@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!--
+        More Templates Visit ==> Free-Template.co
+        -->
+    <title>Sinh nhat cua be</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AIC" />
+    <meta name="keywords" content="this is keywords" />
+    <meta name="author" content="Arthur" />
+    <link rel="icon" href="~/Content/FE_Content/images/iconTab.png" />
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/animate.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/icomoon.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/FE_Content/css/CustomStyle.css">
+    <script src="~/Content/FE_Content/js/jquery.min.js"></script>
+    <script src="~/Content/FE_Content/js/popper.min.js"></script>
+    <script src="~/Content/FE_Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/FE_Content/js/jquery.easing.1.3.js"></script>
+    <script src="~/Content/FE_Content/js/jquery.waypoints.min.js"></script>
+    <script src="~/Content/FE_Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/FE_Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/FE_Content/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/FE_Content/js/jquery.timepicker.min.js"></script>
+    <script src="~/Content/FE_Content/js/jquery.animateNumber.min.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+    <!-- <script src="js/google-map.js"></script> -->
+
+    <script src="~/Content/FE_Content/js/main.js"></script>
+</head>
+<body data-spy="scroll" data-target="#ftco-navbar" data-offset="200">
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="992539267448139"
+         theme_color="#ffc300">
+    </div>
+    <div id="fb-root"></div>
+
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.Action("Index","Art_FEHome")"><img src="~/Content/FE_Content/images/logo_v1.png" width="120" alt="Logo sinhnhatcuabe.com" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"> <span class="oi oi-menu"></span> Menu </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <div class="div_contact_contain">
+                        <div class="div_contact_containItem">
+                            <div class="div_contact_content">
+                                <form class="form-inline" method="post" action="@Url.Action("TimKiem","News")">
+                                    <div style="width:100%;display:flex">
+                                        <input name="key" class="input-group" style="background-color:#f8f9fa;width:100%;padding-left:5px;border-radius:10px 0px 0px 10px;border:0;" type="text" placeholder="Từ khóa ..." />
+                                        <button style="width:50px;border-radius:0px 10px 10px 0px;cursor:pointer;background-color:whitesmoke;border:0;padding: 0;">
+                                            <img src="~/Content/FE_Content/images/iconSearch.png" alt="iconSearch" width="30" />
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active"><a href="@Url.Action("Index","Art_FEHome")#trang_chu" class="nav-link text_menuTop">Trang chủ</a></li>
+                                <li class="nav-item"><a href="#bang_dich_vu" class="nav-link text_menuTop">Dịch vụ</a></li>
+                                @*<li class="nav-item"><a href="@Url.Action("Index","Art_FEHome")#section-offer" class="nav-link">Sự kiện mới</a></li>*@
+                                @*<li class="nav-item"><a href="@Url.Action("Index","Art_FEHome")#section-menu" class="nav-link text_menuTop">Thư viện</a></li>*@
+                                @*<li class="nav-item"><a href="@Url.Action("Index","Art_FEHome")#section-news" class="nav-link">Tin tức</a></li>*@
+                                <li class="nav-item"><a href="@Url.Action("Index","Art_FEHome")#section-menu" class="nav-link text_menuTop">Hình ảnh nổi bật</a></li>
+                                <li class="nav-item"><a href="@Url.Action("Index","Art_FEHome")#section-feedback" class="nav-link text_menuTop">Feedback</a></li>
+                            </ul>
+
+                        </div>
+                        <div class="div_hotlineDetail" style="">
+                            <div class="div_hotline div_hotlineItem">
+                                <div class="div_hotlineImg">
+                                    <img alt="lien he sinh nhat cua be" src="~/Content/FE_Content/images/lienhe-1.gif" height="30" />
+                                </div>
+                                <div class="div_hotlineAddress">
+                                    <div class="p_phoneNumber">0907548764 : Tư Vấn Trang Trí</div>
+                                    <div class="p_phoneNumber">0965228084 : Tư Vấn Biểu Diễn</div>
+                                    <div class="p_phoneNumber">48 Bùi Văn Thêm, P9, Gò Vấp</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="div_body">
+
+            <div class="div_headercontain">
+                <div id="topBanner">
+                    @{ Html.RenderAction("TopBanner", "Art_FEHome");}
+                </div>
+            </div>
+
+
+            <div class="div_bodycontain">
+                <div class="div_leftcontain">
+                    <div class="container div_leftmenu">
+                        <div id="leftMenu">
+
+                        </div>
+                        <div class="div_leftmenu_item">
+                            @{ Html.RenderAction("FacebookPage", "Art_FEHome");}
+                        </div>
+
+                        @{ Html.RenderAction("LeftCate", "Art_FEHome");}
+                    </div>
+                </div>
+                <div class="div_centercontain">
+                    <section id="bang_dich_vu">
+                        <div id="div_servicetable"></div>
+                    </section>
+                    <!-- END section -->
+
+                    @RenderBody()
+
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4 bg-image" style="background-image: url(images/bg_3.jpg);"></div>
+                            <div class="col-lg-8 p-5">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <small>CLOSE </small><span aria-hidden="true">&times;</span> </button>
+                                <h1 class="mb-4">Liên hệ </h1>
+                                <form action="#" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="m_fname">First Name</label>
+                                            <input type="text" class="form-control" id="m_fname">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="m_lname">Last Name</label>
+                                            <input type="text" class="form-control" id="m_lname">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <label for="m_email">Email</label>
+                                            <input type="email" class="form-control" id="m_email">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="m_people">How Many People</label>
+                                            <select name="" id="m_people" class="form-control">
+                                                <option value="1">1 People</option>
+                                                <option value="2">2 People</option>
+                                                <option value="3">3 People</option>
+                                                <option value="4+">4+ People</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="m_phone">Phone</label>
+                                            <input type="text" class="form-control" id="m_phone">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="m_date">Date</label>
+                                            <input type="text" class="form-control" id="m_date">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="m_time">Time</label>
+                                            <input type="text" class="form-control" id="m_time">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <label for="m_message">Message</label>
+                                            <textarea class="form-control" id="m_message" cols="30" rows="7"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Reserve Now">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END Modal -->
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen">
+            <svg class="circular" width="48px" height="48px">
+                <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+                <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+            </svg>
+        </div>
+
+        <div class="div_footercontain">
+
+            <!-- END section -->
+            <hr />
+            <section id="section-menu">
+                @{ Html.RenderAction("LibraryPartial", "Art_FEHome");}
+
+            </section>
+            <hr />
+            <section id="section-feedback">
+                @{ Html.RenderAction("Partial_Feedback", "Customer");}
+
+            </section>
+            <hr />
+            <section id="section-feedback">
+                @{ Html.RenderAction("Workflow", "Art_FEHome");}
+
+            </section>
+            <hr />
+            @*<section id="section-image">
+                @{ Html.RenderAction("SpecialImg", "Art_FEHome");}
+            </section>*@
+            <!-- END section -->
+            <section id="section-contact"></section>
+            <footer class="ftco-footer ftco-bg-dark ftco-section">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="ftco-footer-widget mb-4">
+                                        <h2 class="ftco-heading-2">Sinhnhatcuabe.com</h2>
+                                        <ul class="list-unstyled">
+                                            <li><a href="@Url.Action("Index","Art_FEHome")#trang_chu" class="py-2 d-block">Trang chủ</a></li>
+                                            <li><a href="#bang_dich_vu" class="py-2 d-block">Dịch vụ</a></li>
+                                            @*<li><a href="@Url.Action("Index","Art_FEHome")#section-offer" class="nav-link">Sự kiện mới</a></li>*@
+                                            @*<li><a href="@Url.Action("Index","Art_FEHome")#section-menu" class="py-2 d-block">Thư viện</a></li>*@
+                                            @*<li><a href="@Url.Action("Index","Art_FEHome")#section-news" class="nav-link">Tin tức</a></li>*@
+                                            <li><a href="@Url.Action("Index","Art_FEHome")#section-menu" class="py-2 d-block">Hình ảnh nổi bật</a></li>
+                                            <li><a href="#" class="py-2 d-block">Tư Vấn Trang Trí :  0907548764 </a></li>
+                                            <li><a href="#" class="py-2 d-block">Tư Vấn Biểu Diễn :  0965228084 </a></li>
+                                            <li><a href="#" class="py-2 d-block">Địa chỉ :  48 Bùi Văn Thêm, P9, Gò Vấp </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md">
+                                    <div class="ftco-footer-widget mb-4">
+                                        <h2 class="ftco-heading-2">Mạng xã hội</h2>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#" class="py-2 d-block">Youtube</a></li>
+                                            <li><a href="https://www.facebook.com/Sinhnhatcuabe.vui/" class="py-2 d-block">Facebook</a></li>
+                                            <li><a href="#" class="py-2 d-block">Instagram</a></li>
+                                            <li><a href="#" class="py-2 d-block">Twitter</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--
+                                  <div class="col-md ftco-animate">
+                                    <div class="ftco-footer-widget mb-4">
+                                      <h2 class="ftco-heading-2">Useful links</h2>
+                                      <ul class="list-unstyled">
+                                        <li><a href="#" class="py-2 d-block">Bootstrap 4</a></li>
+                                        <li><a href="#" class="py-2 d-block">jQuery</a></li>
+                                        <li><a href="#" class="py-2 d-block">HTML5</a></li>
+                                        <li><a href="#" class="py-2 d-block">Sass</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                        -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ftco-footer-widget mb-4">
+                                <ul class="ftco-footer-social list-unstyled float-md-right float-lft">
+                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li><a href="https://www.facebook.com/Sinhnhatcuabe.vui/"><span class="icon-facebook"></span></a></li>
+                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md text-left">
+                            <p>&copy; Arthur. All Rights Reserved.  Made with <span class="icon-heart text-danger"></span> by <a href="http://ytuongvagiaiphap.com/">Arthur Idea co</a></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+    <script>
+    async function loadLeftMenu() {
+        await $('#leftMenu').load('@Url.Action("LeftMenu","DanhMuc")');
+    }
+    async function loadBangDichVu() {
+        await $('#div_servicetable').load('@Url.Action("BangCacDichVu", "Art_FEHome")');
+    }
+
+        $(document).ready(function () {
+            var isHome = @(Json.Encode(ViewBag.IsHome??false));
+            if (isHome === true) {
+            loadBangDichVu();
+        }
+        loadLeftMenu();
+    });
+    </script>
+    <!-- Load Facebook SDK for JavaScript -->
+    @*<div id="fb-root"></div>*@
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v3.2'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+
+    <script async defer src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=332000547442440&autoLogAppEvents=1"></script>
+</body>
+</html>

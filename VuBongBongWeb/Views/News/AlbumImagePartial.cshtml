@@ -1,0 +1,139 @@
+﻿@model MainLibrary.Entity.WebCenter.AlbumDetail
+
+@{
+    ViewBag.Title = "AlbumDetails";
+    Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+}
+
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        @Html.ValidationBootstrap()
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+                    <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Image </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form onload="getFileFunction()" id="smart-form-register" action="@Url.Action("SaveAlbumImage", "News")" method="POST" enctype="multipart/form-data" class="smart-form">
+
+                                <input type="hidden" id="FileId" name="FileId" value="@Model.FileId" />
+                                <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                                <input type="hidden" id="AlbumId" name="AlbumId" value="@ViewBag.parent" />
+                                <fieldset>
+                                    <div class="form-modal">
+                                        <div>
+                                            <section>
+                                                <img id="imgDes" src="@Model.FEPath" width="200px" height="200px" />
+                                                <label class="label">File input</label>
+                                                <div class="input input-file">
+                                                    <span class="button"><input id="myFile" accept="image/*" type="file" name="myFile" onchange="getFileFunction()" placeholder="Include some files">Browse</span><input id="fileText" type="text" placeholder="Include some files" readonly="">
+                                                </div>
+                                                <div id="fileNote" class="note note-error" style="color:red"></div>
+                                            </section>
+                                        </div>
+                                        <div>
+                                            <section>
+                                                <label class="label">Tiêu đề</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-file-text"></i>
+                                                    <input type="text" id="Title" name="Title" value="@Model.Title">
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <label class="label">Mô tả</label>
+                                                <div class="input">
+                                                    <textarea id="Description" name="Description" class="form-control" rows="5">@Model.Description</textarea>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <section>
+                                        <label class="checkbox">
+                                            @Html.CheckBox("IsActive", Model.IsActive)
+                                            <i></i>Enable
+                                        </label>
+                                        <label class="checkbox">
+                                            @Html.CheckBox("IsPin", Model.IsPin)
+                                            <i></i>Nổi bật
+                                        </label>
+                                    </section>
+                                </fieldset>
+                                <footer>
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                </footer>
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+            <!-- END COL -->
+        </div>
+        <!-- END ROW -->
+    </section>
+    <!-- end widget grid -->
+</div>
+@section pagespecific {
+    <script type="text/javascript">
+        function getFileFunction() {
+            var x = document.getElementById("myFile");
+            var txt = "";
+            var file = x.files[0];
+            if (file) {
+                if (file.name == "") {
+                    txt += "Select one or more files.";
+                } else if ((file.size / 1024) >= 3024) {
+                    txt += "File size must be less than 3Mb.";
+                } else {
+                    txt += "";
+                }
+            }
+            //}
+            document.getElementById('fileText').value = file.name;
+            document.getElementById('fileNote').innerHTML = txt;
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgDes').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+}

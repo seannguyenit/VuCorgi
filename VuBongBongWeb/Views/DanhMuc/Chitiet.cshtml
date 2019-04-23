@@ -1,0 +1,88 @@
+﻿@model MainLibrary.Entity.WebCenter.Category
+
+@{
+                /**/
+
+                ViewBag.Title = "Chitiet";
+                Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
+}
+<section id="chitiet">
+    <div class="container">
+        <div class="col-md-12 col-lg-12">
+            <div class="row">
+                <div class="chitiet_contain">
+                    <div class="chitiet_title">
+                        @Model.Name
+                    </div>
+                    <div class="chitiet_description">
+                        @Html.Raw(Model.Description)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="chitiet_contain">
+
+                    @foreach (var item in Model.Child.Take(10))
+                    {
+                        <div class="chitiet_relatedPro">
+                            <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
+                                <img src="@item.FEPath" class="relatedImg" />
+                            </a>
+                            <div class="relatedPro_contain">
+                                <div class="relatedPro_title">
+                                    <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
+                                </div>
+                                <div class="chitiet_description">
+                                    @item.Description
+                                </div>
+                                <div class="relatedPro_date">
+                                    @(item.CreatedDate.ToString("dd/MM/yyyy"))
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @*@foreach (var item in Model.Child.Where(c => c.Type == MainLibrary.Resource.WebCenter.NewsType.Album.ToString()).Take(3))
+                {
+                    <div class="chitiet_relatedPro">
+                        <a href="#">
+                            <img class="relatedImg" />
+                        </a>
+                        <div class="relatedPro_contain">
+                            <div class="relatedPro_title">
+                                <a href="#">@item.Title</a>
+                            </div>
+                            <div class="relatedPro_description">
+                                @item.Description
+                            </div>
+                            <div class="relatedPro_date">
+                                @item.CreatedDate
+                            </div>
+                        </div>
+                    </div>
+                }*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="chitiet_contain">
+                    <div class="fb-like" data-href="@HttpContext.Current.Request.Url.AbsoluteUri" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="chitiet_contain">
+                    @*<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>*@
+                    <div class="fb-comments" data-width="100%" data-href="@HttpContext.Current.Request.Url.AbsoluteUri" data-numposts="10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //alert('asdasdasdsa')
+        //$(document).scrollTop($("#autocroll").offset().top);
+        $('html, body').animate({
+            scrollTop: $('#chitiet').offset().top + 600
+        }, 800);
+    })
+</script>

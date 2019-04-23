@@ -1,0 +1,127 @@
+﻿@model MainLibrary.Entity.WebCenter.News[]
+
+@{
+    ViewBag.Title = "AlbumMain";
+    Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
+    string keyword = string.Empty;
+    string fromDate = DateTime.Now.AddDays(-15).Date.ToString("dd/MM/yyyy");
+    string toDate = DateTime.Now.Date.ToString("dd/MM/yyyy");
+    var data = Model ?? new MainLibrary.Entity.WebCenter.News[0];
+    //int count = 0;
+}
+<div class="row">
+    <article class="col-sm-12">
+        <div class="navbar navbar-inverse">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <div class="navbar-form" role="search">
+                    <div class="form-group">
+                        <label>From</label>
+                        <input type="text" name="fromDate" id="datepickerFrom" placeholder="From date" class="form-control datepicker" data-dateformat="dd/mm/yy" value="@fromDate">
+                    </div>
+                    <div class="form-group">
+                        <label>To</label>
+                        <input type="text" name="toDate" id="datepickerTo" placeholder="To date" class="form-control datepicker" data-dateformat="dd/mm/yy" value="@toDate">
+                    </div>
+                    <input type="hidden" name="type" value="@MainLibrary.Resource.WebCenter.NewsType.Album.ToString()" />
+                    <div class="form-group">
+                        <label class="checkbox-inline" style="width: 300px">
+                            @Html.DropDownList("cateId", (IEnumerable<SelectListItem>)(ViewBag.Cate), new { @class = "select2 select2-offscreen", @style = "width:100%", @placeholder = "Select Category" })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input id="inputkeyword" name="keyword" class="form-control" placeholder="Keyword" type="text">
+                    </div>
+                    <button id="btSearch" class="btn btn-primary" onclick="loadPage()">
+                        Submit
+                    </button>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </article>
+</div>
+
+<div id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Danh sách tin</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <div id="mainDataTable"></div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div align="right">
+                    <a class="btn btn-sm btn-success" href="@Url.Action("Details",new { type = MainLibrary.Resource.WebCenter.NewsType.Album.ToString() })">Create new</a>
+                </div>
+            </article>
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+
+
+@section pagespecific {
+    <script type="text/javascript">
+        async function loadPage() {
+            var key = $('#inputkeyword').val();
+            var from = $('#datepickerFrom').val();
+            var to = $('#datepickerTo').val();
+            var cateId = $('#cateId').val();
+            var type = '@MainLibrary.Resource.WebCenter.NewsType.Album.ToString()'
+            $('#mainDataTable').load("@Url.Action("NewsPatialSearch","News")",
+                { keyword: key, isDecline: null, from: from, to: to, cateId: cateId, isEnable: true, type: type });
+        }
+        $(document).ready(function () {
+            loadPage();
+        });
+    </script>
+}

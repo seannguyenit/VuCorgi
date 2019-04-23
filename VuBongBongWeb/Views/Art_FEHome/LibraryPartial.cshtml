@@ -1,0 +1,95 @@
+﻿@model  Dictionary<Category, AlbumDetail[]>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center mb-5 ftco-animate">
+            <h2 class="display-4">Thư viện hình ảnh</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-7">
+                    <p class="lead">Tổng hợp các sự kiện đã được tổ chức trong thời gian qua</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <ul class="nav ftco-tab-nav nav-pills mb-5" id="pills-tab" role="tablist">
+                @{
+                    int count = 1;
+                    foreach (var i in Model)
+                    {
+                        if (i.Key != null)
+                        {
+                            if (count == 1)
+                            {
+                                <li class="nav-item ftco-animate marginSpace-10"> <a class="nav-link active" id="news-@i.Key.Id" data-toggle="pill" href="#href-@i.Key.Id" role="tab" aria-controls="href-@i.Key.Id" aria-selected="true">@i.Key.Name</a> </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item ftco-animate marginSpace-10"> <a class="nav-link" id="news-@i.Key.Id" data-toggle="pill" href="#href-@i.Key.Id" role="tab" aria-controls="href-@i.Key.Id" aria-selected="false">@i.Key.Name</a> </li>
+                            }
+                            count++;
+                        }
+                    }
+                }
+            </ul>
+            <div class="tab-content text-left">
+                @{
+                    int count2 = 1;
+                    foreach (var i in Model)
+                    {
+                        if (i.Key != null)
+                        {
+                            if (count2 == 1)
+                            {
+                                <div class="tab-pane fade show active" id="href-@i.Key.Id" role="tabpanel" aria-labelledby="news-@i.Key.Id">
+                                    <div class="row">
+                                        <div class="col-md-12 ftco-animate">
+                                            @{
+                                                foreach (var item in i.Value)
+                                                {
+                                                    <div class="col-md-6 media menu-item ftco-animate">
+                                                        <a href="@item.FEPath" class="image-popup"><img class="mr-3 img-fluid" src="@item.FEPath" alt="@item.Title"></a>
+                                                        <div class="media-body">
+                                                            <a><h5 class="mt-0">@item.Title</h5></a>
+                                                            <p>@Html.Raw(item.Description)</p>
+                                                            <h6 class="text-primary menu-price">@item.CreatedDate.ToString("dd/MM/yyyy")</h6>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="tab-pane fade" id="href-@i.Key.Id" role="tabpanel" aria-labelledby="news-@i.Key.Id">
+                                    <div class="row">
+                                        <div class="col-md-12 ftco-animate">
+                                            @{
+                                                foreach (var item in i.Value)
+                                                {
+                                                    <div class="col-md-6 media menu-item ftco-animate">
+                                                        <a href="@item.FEPath" class="image-popup">
+                                                            <img class="mr-3 img-fluid" src="@item.FEPath" alt="@item.Title">
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <a><h5 class="mt-0">@item.Title </h5></a>
+                                                            <p>@Html.Raw(item.Description)</p>
+                                                            <h6 class="text-primary menu-price">@item.CreatedDate.ToString("dd/MM/yyyy")</h6>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            count2++;
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

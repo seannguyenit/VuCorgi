@@ -1,0 +1,139 @@
+﻿@model VuBongBongWeb.Models.WebInfoModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
+    var entity = (Model ?? new VuBongBongWeb.Models.WebInfoModel()) as VuBongBongWeb.Models.WebInfoModel;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+}
+
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                    <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                        <h2>Thông tin </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                            @Html.ValidationBootstrap()
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="smart-form-register" onload="getFileFunction()" action="@Url.Action("SaveWebInfo", "WebInfo")" method="POST" class="smart-form" enctype="multipart/form-data">
+                                <fieldset>
+                                    @*<input type="hidden" value="@entity.Type" />*@
+                                    <section>
+                                        <img id="imgDes" src="@entity.FEPath" width="200px" height="200px" />
+                                        <label class="label">~ 500 X 500 (px)</label>
+                                        <label class="label">File input</label>
+                                        <div class="input input-file">
+                                            <span class="button"><input id="myFile" accept="image/*" type="file" name="myFile" onchange="getFileFunction()" placeholder="Include some files">Browse</span><input id="fileText" type="text" placeholder="Include some files" readonly="">
+                                        </div>
+                                        <div id="fileNote" class="note note-error" style="color:red"></div>
+                                    </section>
+                                    @Html.HiddenFor(m => m.Type)
+                                    @Html.TextAreaFor(m => m.HTMLstr)
+                                    @*<textarea name="ckeditor">@entity.Description</textarea>*@
+                                </fieldset>
+                            </form>
+                            <input id="inputFile" type="file" multiple="multiple" maxlength="5" accept="image/*" style="display:none" />
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+
+                    <!-- end widget div -->
+                </div>
+                <div align="right">
+
+                    <button type="submit" onclick="$('#smart-form-register').submit()" class="btn btn-primary padding-bottom-5">
+                        Save
+                    </button>
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->
+@section pagespecific {
+    <script src="/scripts/plugin/ckeditor/ckeditor.js"></script>
+    <script src="/Scripts/JavaHelper/FileManagement.js"></script>
+    <script type="text/javascript">
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        var editor;
+        $('#inputFile').change(function () {
+            var input = document.getElementById('inputFile');
+            if (input.files !== 'undefined' && input.files !== null && input.files.length !== 0) {
+                    Savefile(input.files, editor, '@Url.Action("Savefile", "Base")');
+                }
+        });
+        function getFileFunction() {
+            var x = document.getElementById("myFile");
+            var txt = "";
+            var file = x.files[0];
+            if (file) {
+                if (file.name == "") {
+                    txt += "Select one or more files.";
+                } else if ((file.size / 1024) >= 3024) {
+                    txt += "File size must be less than 3Mb.";
+                } else {
+                    txt += "";
+                }
+            }
+            //}
+            document.getElementById('fileText').value = file.name;
+            document.getElementById('fileNote').innerHTML = txt;
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgDes').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(file);
+        }
+        $(document).ready(function () {
+            editor = CKEDITOR.replace('HTMLstr', {
+                height: '380px', startupFocus: true
+            });
+            editor.addCommand("insertImageCommand", { // create named command
+                exec: function () {
+                    $('#inputFile').click();
+                }
+            });
+
+            editor.ui.addButton('SuperButton', { // add new button and bind our command
+                label: "Click Insert Image",
+                command: 'insertImageCommand',
+                toolbar: 'insert',
+                icon: '/Scripts/plugin/ckeditor/plugins/image/images/image.png'
+            });
+        })</script>
+}

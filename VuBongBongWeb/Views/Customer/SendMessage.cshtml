@@ -1,0 +1,32 @@
+﻿@model MainLibrary.Entity.WebCenter.Customer_Message
+@{
+    ViewBag.Title = "SendMessage";
+    Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
+    var workflow = ViewBag.Workflow ?? new Workflow();
+}
+
+<div class="bg-color-forform">
+    <div class="container content-sm">
+        <div class="row">
+            <div class="notice_workflow">
+                Bạn đã chọn dịch vụ: <span>@workflow.Title</span> <br />
+                Vui lòng điền đầy đủ nội dung bên dưới để bộ phận khách hàng có thể liên lạc với bạn trong thời gian sớm nhất.
+            </div>
+        </div>
+        <div class="row">
+            @Html.ValidationBootstrap()
+            <div id="formSendMessage">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var data = { typeStr: '@MainLibrary.Resource.WebCenter.MessageType.Request.ToString()', message: @Html.Raw(Json.Encode(Model)) };
+        $('#formSendMessage').load('/Customer/PartialMessage', data);
+        $('html, body').animate({
+            scrollTop: $('#formSendMessage').offset().top - 200
+        }, 800);
+    })
+</script>

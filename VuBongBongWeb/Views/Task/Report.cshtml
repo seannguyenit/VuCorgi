@@ -1,0 +1,56 @@
+﻿@model MainLibrary.Entity.WebCenter.TaskReportUser[]
+
+@{
+    /**/
+
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
+}
+<div class="row">
+    <article class="col-sm-12">
+        <div class="navbar navbar-inverse">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <div class="navbar-form" role="search">
+                    <div class="form-group" width="100%">
+                        @Html.DropDownList("listUser", (IEnumerable<SelectListItem>)ViewBag.TargetUser, new { @class = "form-control", @placeholder = "Select User" })
+                    </div>
+                    @*<div class="form-group">
+                            <input id="inputkeyword" name="keyword" class="form-control" placeholder="Keyword" type="text">
+                        </div>*@
+                    <button id="btSearch" class="btn btn-primary" onclick="loadPage()">
+                        Submit
+                    </button>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </article>
+</div>
+<div id="numberofTask">
+
+</div>
+@section pagespecific {
+    <script>
+        async function loadPage() {
+            openHoldOn();
+            var user = $('#listUser').val();
+            $('#numberofTask').load("@Url.Action("PartialReportUser", "Task")",
+                {
+                    userId: user
+                });
+            closeHoldOn();
+        }
+        $(document).ready(function () {
+            loadPage();
+        });
+    </script>
+}

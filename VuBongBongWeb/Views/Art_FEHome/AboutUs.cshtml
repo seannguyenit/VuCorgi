@@ -1,0 +1,26 @@
+﻿@model MainLibrary.Entity.WebCenter.WebInfomation
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
+    HtmlString html = new HtmlString(Model.Description);
+}
+
+
+
+<!-- Pricing -->
+<div class="bg-color-sky-light">
+    <div class="content container">
+        <div class="row">
+            <div class="margin-b-30">
+                <h3><i class="pricing-icon icon-info"> Giới thiệu</i></h3>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="contentHtml">
+                @Html.Raw(html)
+            </div>
+        </div>
+        <!--// end row -->
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model MainLibrary.Entity.WebCenter.Customer_Message
+@{ 
+    var type = ViewBag.TypeMss?? MainLibrary.Resource.WebCenter.MessageType.Contact.ToString();
+    var entity = Model ?? new Customer_Message();
+}
+
+<div class="sendMessage_center">
+    <h2 class="color-white">Gửi tin nhắn cho chúng tôi</h2>
+
+    <form action="@Url.Action("SendMessage")" method="post">
+        <input type="text" class="form-control footer-input margin-b-20" maxlength="250" placeholder="Tên" name="name" required>
+        <input type="email" class="form-control footer-input margin-b-20" maxlength="250" placeholder="Email" name="email" required>
+        <input type="tel" class="form-control footer-input margin-b-20" pattern="\d*" title="Số điện thoại không đúng !" maxlength="12" placeholder="Số điện thoại" name="phone" required>
+        <input type="text" class="form-control footer-input margin-b-20" maxlength="250" placeholder="Tiêu đề" name="title" value="@entity.Title" required>
+        <textarea class="form-control footer-input margin-b-30" rows="6" maxlength="3000" placeholder="Nội dung" name="content" required></textarea>
+        <input type="hidden" value="@type" name="type"/>
+        <button type="submit" class="btn-theme btn-theme-sm btn-base-bg text-uppercase">Gửi</button>
+    </form>
+</div>
+
+@*<script>
+    $(document).ready(function () {
+        this.toggle(10000);
+    })
+</script>*@

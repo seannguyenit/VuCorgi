@@ -1,0 +1,16 @@
+﻿<div class="login-info">
+    <span>
+        @if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            var userInfo = HttpContext.Current.User as VuBongBongWeb.Security.WebPrincipal;
+            @*<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+
+                @*<img src="@(userInfo.AvatarUrl)" alt="me" class="online" />*@
+            <a>
+                <span class="dot"></span>
+                <span>@(userInfo.UserDetail.UserName)</span>
+                <i class="fa fa-angle-down"></i>
+            </a>
+        }
+    </span>
+</div>

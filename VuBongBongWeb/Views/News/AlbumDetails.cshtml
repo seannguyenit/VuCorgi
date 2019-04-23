@@ -1,0 +1,59 @@
+﻿@model MainLibrary.Entity.WebCenter.AlbumDetail[]
+
+@{
+    ViewBag.Title = "AlbumDetails";
+    Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-align-right">
+            <div class="page-title">
+                <a href="@Url.Action("AlbumImagePartial", "News", new { id = 0,parentId = ViewBag.Parent??0 })" class="btn btn-default">New Upload</a>
+                <a href="@Url.Action("AlbumDetails","News",new { id = ViewBag.Parent??0 })" id="bt_refresh" class="btn btn-default">Refresh</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @Html.ValidationBootstrap()
+    </div>
+    <!-- row -->
+    <div class="row">
+        <!-- SuperBox -->
+        <div class="superbox col-sm-12">
+            @{ foreach (var item in Model)
+                {
+                    <div class="superbox-list">
+                        <img src="@item.FEPath"
+                             data-img="" 
+                             data-editlink="@Url.Action("AlbumImagePartial", "News", new { id = item.Id,parentId = ViewBag.Parent??0 })"
+                             data-deletelink="@Url.Action("AlbumImagePartial", "News", new { id = item.Id,parentId = ViewBag.Parent??0 })"
+                             data-description="@item.Description"
+                             alt="@item.Title" 
+                             title="@item.Title" 
+                             class="superbox-img">
+                    </div>
+                }
+            }
+
+            <div class="superbox-float"></div>
+        </div>
+        <!-- /SuperBox -->
+        <div class="superbox-show" style="height:300px; display: none"></div>
+    </div>
+    <!-- end row -->
+</div>
+@section pagespecific {
+    <script src="/scripts/plugin/superbox/superbox.min.js"></script>
+
+    <script type="text/javascript">
+        var selectedId = 0;
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+        $(document).ready(function () {
+
+            $('.superbox').SuperBox();
+        })
+
+    </script>
+
+}
