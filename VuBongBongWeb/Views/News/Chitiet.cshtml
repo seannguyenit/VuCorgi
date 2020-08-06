@@ -9,7 +9,7 @@
     <div class="container">
         <div class="col-md-12 col-lg-12">
             <div class="row">
-                <div class="chitiet_contain">
+                <div class="chitiet_contain text-left">
                     <div class="chitiet_title">
                         @Model.Title
                     </div>
@@ -29,51 +29,64 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="chitiet_contain">
-                    <div class="chitiet_title">
+            @if (Model.Type != MainLibrary.Resource.WebCenter.NewsType.Product.ToString())
+            {
+                <hr />
+                <div class="row">
+                    <div class="chitiet_title" style="text-align:left">
                         Sự kiện khác
                     </div>
-                    @foreach (var item in ViewBag.Related)
-                    {
-                        <div class="chitiet_relatedPro">
-                            <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
-                                <img src="@item.FEPath" class="relatedImg" />
-                            </a>
-                            <div class="relatedPro_contain">
-                                <div class="relatedPro_title">
-                                    <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
-                                </div>
-                                <div class="chitiet_description">
-                                    @item.Description
-                                </div>
-                                <div class="relatedPro_date">
+                    <div class="tintuc_contain">
+                        @foreach (var item in ViewBag.Related)
+                        {
+                            <div class="tintuc_relatedPro">
+                                <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
+                                    <img src="@item.FEPath" class="tintucrelatedImg" />
+                                </a>
+                                <div class="tintucrelatedPro_contain">
+                                    <div class="tintucrelatedPro_title">
+                                        <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
+                                    </div>
+                                    <div class="tintuc_description">
+                                        @item.Description
+                                    </div>
+                                    @*<div class="relatedPro_date">
                                     @(item.CreatedDate.ToString("dd/MM/yyyy"))
+                                </div>*@
                                 </div>
                             </div>
-                        </div>
-                    }
-                    @*@foreach (var item in Model.Child.Where(c => c.Type == MainLibrary.Resource.WebCenter.NewsType.Album.ToString()).Take(3))
-                {
-                    <div class="chitiet_relatedPro">
-                        <a href="#">
-                            <img class="relatedImg" />
-                        </a>
-                        <div class="relatedPro_contain">
-                            <div class="relatedPro_title">
-                                <a href="#">@item.Title</a>
-                            </div>
-                            <div class="relatedPro_description">
-                                @item.Description
-                            </div>
-                            <div class="relatedPro_date">
-                                @item.CreatedDate
-                            </div>
-                        </div>
+                        }
                     </div>
-                }*@
                 </div>
-            </div>
+            }
+            @*else
+            {
+                <hr />
+                <div class="row">
+                    <div class="chitiet_title" style="text-align:left">
+                        Sự kiện khác
+                    </div>
+                    <div class="bg-light chitiet_contain">
+                        @foreach (var item in ViewBag.Related)
+                        {
+                            <div class="col-md-4 chitiet_relatedPro">
+                                <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
+                                    <img src="@item.FEPath" class="relatedImg" />
+                                </a>
+                                <div class="relatedPro_contain">
+                                    <div class="relatedPro_title">
+                                        <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
+                                    </div>
+                                    <div class="chitiet_description">
+                                        @item.Description
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }*@
+
             <div class="row">
                 <div class="chitiet_contain">
                     <div class="fb-like" data-href="@HttpContext.Current.Request.Url.AbsoluteUri" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
@@ -94,7 +107,7 @@
         //alert('asdasdasdsa')
         //$(document).scrollTop($("#autocroll").offset().top);
         $('html, body').animate({
-            scrollTop: $('#chitiet').offset().top + 600
+            scrollTop: $('#chitiet').offset().top
         }, 800);
     })
 </script>

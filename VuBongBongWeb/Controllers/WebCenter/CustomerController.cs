@@ -63,7 +63,7 @@ namespace VuBongBongWeb.Controllers.WebCenter
                     ModelState.AddModelError("", "content is required !");
                     return View("Details", collection);
                 }
-                if (myFile != null && myFile.ContentLength >= (3024 * 1024))
+                if (myFile != null && myFile.ContentLength >= (2024 * 1024))
                 {
                     ModelState.AddModelError("", "File too big !");
                     return View("Details", collection);

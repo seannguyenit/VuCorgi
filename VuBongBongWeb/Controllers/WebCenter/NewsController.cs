@@ -38,9 +38,10 @@ namespace VuBongBongWeb.Controllers.WebCenter
         //}
 
         [Authentication]
-        [MenuSync(IsBindingWithParent = false, Level = 1, SyncOrder = 1, Description = "Danh sách Album", CssClass = "fa fa-info")]
+        [MenuSync(IsBindingWithParent = false, Level = 1, SyncOrder = 1, Description = "Danh sách tin tức", CssClass = "fa fa-info")]
         public ActionResult AlbumMain()
         {
+
             var listCate = new List<Category>();
             using (var repo = new CategoryManager())
             {
@@ -57,9 +58,41 @@ namespace VuBongBongWeb.Controllers.WebCenter
         }
 
         [Authentication]
-        [MenuSync(ParentAction = "AlbumMain", IsShownOnMenuBar = false, IsBindingWithParent = true, Level = 2, SyncOrder = 1, Description = "List Image")]
-        public ActionResult AlbumImagePartial(int id, int parentId)
+        [MenuSync(IsBindingWithParent = false, Level = 1, SyncOrder = 2, Description = "Danh sách sản phẩm", CssClass = "fa fa-info")]
+        public ActionResult ProductMain()
         {
+
+            var listCate = new List<Category>();
+            using (var repo = new CategoryManager())
+            {
+                listCate = repo.GetAllCategory(string.Empty, out string error, true).ToList();
+            }
+            listCate.Insert(0, new Category() { Id = 0, Name = "Tất cả danh mục" });
+            ViewBag.Cate = listCate.Select(f => new SelectListItem
+            {
+                Value = f.Id.ToString(),
+                Text = f.Name,
+                Selected = f.Id == 0
+            });
+            return View();
+        }
+        [Authentication]
+        [MenuSync(IsBindingWithParent = false, Level = 1, SyncOrder = 3, Description = "Thư viện hình ảnh", CssClass = "fa fa-info")]
+        public ActionResult ImageMain()
+        {
+            var data = new AlbumDetail[0];
+            using (var _manager = new NewsAndAlbumManager())
+            {
+                data = _manager.GetAllAlbumDetail(null, out string error,true,true);
+            }
+            return View(data);
+        }
+
+        [Authentication]
+        [MenuSync(ParentAction = "AlbumMain", IsShownOnMenuBar = false, IsBindingWithParent = true, Level = 2, SyncOrder = 1, Description = "List Image")]
+        public ActionResult AlbumImagePartial(int id, int parentId,bool isPin = false)
+        {
+            var listCate = new List<Category>();
             var data = new AlbumDetail();
             if (id != 0)
             {
@@ -68,7 +101,19 @@ namespace VuBongBongWeb.Controllers.WebCenter
                     data = _manager.GetDetailAlbum(id, out string error);
                 }
             }
+            using (var repo = new CategoryManager())
+            {
+                listCate = repo.GetAllCategory(string.Empty, out string error, true).ToList();
+            }
+            listCate.Insert(0, new Category() { Id = 0, Name = "Root" });
+            ViewBag.Cate = listCate.Select(f => new SelectListItem
+            {
+                Value = f.Id.ToString(),
+                Text = f.Name,
+                Selected = data?.CatId == f.Id
+            });
             ViewBag.parent = parentId;
+            ViewBag.IsPin = isPin;
             return View(data);
         }
 
@@ -92,14 +137,7 @@ namespace VuBongBongWeb.Controllers.WebCenter
         {
             try
             {
-                #region Validate
-
-                if (myFile != null && myFile.ContentLength >= (3024 * 1024))
-                {
-                    ModelState.AddModelError("", "File too big !");
-                    return View("AlbumImagePartial", collection);
-                }
-                #endregion
+               
 
                 string error = string.Empty;
                 int newId = collection.FileId;
@@ -145,7 +183,14 @@ namespace VuBongBongWeb.Controllers.WebCenter
                     return View("AlbumImagePartial", collection);
                 }
                 #endregion
-                return RedirectToAction("AlbumDetails", new { id = collection.AlbumId });
+                if (collection.AlbumId != 0)
+                {
+                    return RedirectToAction("AlbumDetails", new { id = collection.AlbumId });
+                }
+                else
+                {
+                    return RedirectToAction("ImageMain");
+                }
             }
             catch (Exception e)
             {
@@ -182,7 +227,6 @@ namespace VuBongBongWeb.Controllers.WebCenter
         {
             DateTime? fromDate = Utils.ConvertStrToDateTime(from, null);
             DateTime? toDate = Utils.ConvertStrToDateTime(to, null);
-
             var currentUser = ((WebPrincipal)HttpContext.User).UserDetail.UserId;
             var data = new News[0];
             using (var _manager = new NewsAndAlbumManager())
@@ -227,27 +271,46 @@ namespace VuBongBongWeb.Controllers.WebCenter
         [HttpPost]
         [Authentication]
         [MenuSync(ParentAction = "AlbumMain", IsShownOnMenuBar = false, IsBindingWithParent = true, Level = 2, SyncOrder = 6, Description = "Edit", CssClass = "fa fa-money")]
-        public ActionResult SaveNews(NewsModel collection)
+        public ActionResult Details(NewsModel collection, HttpPostedFileBase myFile, bool? isProduct)
         {
             try
             {
-                // TODO: Add update logic here
+                if (isProduct ?? true)
+                {
+                    collection.Type = MainLibrary.Resource.WebCenter.NewsType.Product.ToString();
+                }
+                else
+                {
+                    collection.Type = MainLibrary.Resource.WebCenter.NewsType.News.ToString();
+                }
+                var listCate = new List<Category>();
+                using (var repo = new CategoryManager())
+                {
+                    listCate = repo.GetAllCategory(string.Empty, out string error2, true).ToList();
+                }
+                listCate.Insert(0, new Category() { Id = 0, Name = "Root" });
+                ViewBag.Cate = listCate.Select(f => new SelectListItem
+                {
+                    Value = f.Id.ToString(),
+                    Text = f.Name,
+                    Selected = collection?.CateID == f.Id
+                });
                 #region Validate
 
                 if (string.IsNullOrEmpty(collection.Title))
                 {
-                    ModelState.AddModelError("", "Title is required !");
-                    return RedirectToAction("Details", collection.Id);
+                    ModelState.AddModelError("", "Nhập tên !");
+                    return View(collection.GetOriginal());
                 }
                 if (string.IsNullOrEmpty(collection.Description))
                 {
-                    ModelState.AddModelError("", "description is required !");
-                    return RedirectToAction("Details", collection.Id);
+                    ModelState.AddModelError("", "Nhập mô tả !");
+                    return View(collection.GetOriginal());
                 }
-                if (collection.myFile != null && collection.myFile.ContentLength >= (3024 * 1024))
+                if (myFile != null && myFile.ContentLength >= (2024 * 1024))
                 {
-                    ModelState.AddModelError("", "File too big !");
-                    return RedirectToAction("Details", collection.Id);
+                    ModelState.AddModelError("", "File quá lớn (< 2Mb) !");
+                    return View(collection.GetOriginal());
                 }
 
                 #endregion
@@ -255,31 +318,31 @@ namespace VuBongBongWeb.Controllers.WebCenter
                 string error = string.Empty;
                 int newId = collection.FileId ?? 0;
                 #region SaveFile
-                if (newId == 0 && collection.myFile == null)
+                if (newId == 0 && myFile == null)
                 {
-                    ModelState.AddModelError("", "Please input image !");
-                    return RedirectToAction("Details", collection.Id);
+                    ModelState.AddModelError("", "Nhập file !");
+                    return View(collection.GetOriginal());
                 }
-                if (collection.myFile != null)
+                if (myFile != null)
                 {
                     MemoryStream ms = new MemoryStream();
-                    collection.myFile.InputStream.CopyTo(ms);
+                    myFile.InputStream.CopyTo(ms);
                     var fileAtt = new FileManagement()
                     {
                         Id = collection.FileId ?? 0,
-                        DisplayName = collection.myFile.FileName
+                        DisplayName = myFile.FileName
                     };
                     newId = FileManager.SaveFile(ms.ToArray(), fileAtt, ((WebPrincipal)HttpContext.User).UserDetail.UserId, out error);
                 }
                 if (!string.IsNullOrEmpty(error))
                 {
                     ModelState.AddModelError("", error);
-                    return RedirectToAction("Details", collection.Id);
+                    return View(collection.GetOriginal());
                 }
                 if (newId == 0)
                 {
                     ModelState.AddModelError("", "Cannot save this file !");
-                    return RedirectToAction("Details", collection.Id);
+                    return View(collection.GetOriginal());
                 }
                 #endregion
 
@@ -291,6 +354,7 @@ namespace VuBongBongWeb.Controllers.WebCenter
                 {
                     CateID = collection.CateID,
                     Content = collection.HTMLstr ?? string.Empty,
+                    Order = collection.Order,
                     CreatedDate = collection.CreatedDate,
                     CreatedUser = collection.CreatedUser,
                     Description = collection.Description,
@@ -309,19 +373,19 @@ namespace VuBongBongWeb.Controllers.WebCenter
                 if (!dt)
                 {
                     ModelState.AddModelError("", error);
-                    return RedirectToAction("Details", collection.Id);
+                    return View(collection.GetOriginal());
                 }
                 #endregion
-                if (collection.Type == MainLibrary.Resource.WebCenter.NewsType.Album.ToString())
+                if (collection.Type == MainLibrary.Resource.WebCenter.NewsType.Product.ToString())
                 {
-                    return RedirectToAction("AlbumMain");
+                    return RedirectToAction("ProductMain");
                 }
-                return RedirectToAction("NewsMain");
+                return RedirectToAction("AlbumMain");
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("", e.Message);
-                return View("Details", collection.Id);
+                return View(collection.GetOriginal());
             }
         }
 
@@ -386,7 +450,7 @@ namespace VuBongBongWeb.Controllers.WebCenter
                     dt = repo.GetDetailNews(id, out error);
                     if (dt != null)
                     {
-                        relatedNews = repo.GetAllNews(string.Empty, null, null, null, out error, cateId: dt.CateID).OrderBy(c => c.CreatedDate).Take(3).ToArray();
+                        relatedNews = repo.GetAllNews(string.Empty, null, null, null, out error, cateId: dt.CateID, isEnable: true).OrderBy(c => c.CreatedDate).Take(3).ToArray();
                         dt.LstImg = repo.GetAllAlbumDetail(dt.Id, out error, true).ToList();
                     }
                 }

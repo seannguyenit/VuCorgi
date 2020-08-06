@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
     var entity = (Model ?? new News()) as MainLibrary.Entity.WebCenter.News;
     string type = ViewBag.TypeNews;
-    bool isAlBum = (type == MainLibrary.Resource.WebCenter.NewsType.Album.ToString());
     HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+    bool isProduct = ((entity.Type == MainLibrary.Resource.WebCenter.NewsType.Product.ToString()) || ((entity.Id == 0) && ((ViewBag.TypeNews ?? string.Empty) == MainLibrary.Resource.WebCenter.NewsType.Product.ToString())));
 }
 <div id="content">
 
@@ -44,7 +44,7 @@
                         <!-- end widget edit box -->
                         <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <form onload="getFileFunction()" id="smart-form-register" action="@Url.Action("SaveNews")" method="POST" enctype="multipart/form-data" class="smart-form">
+                            <form onload="getFileFunction()" id="smart-form-register" action="@Url.Action("Details")" method="POST" enctype="multipart/form-data" class="smart-form">
 
                                 <input type="hidden" id="fileId" name="fileId" value="@entity.FileId" />
                                 <input type="hidden" id="Id" name="Id" value="@entity.Id" />
@@ -53,6 +53,23 @@
                                     @entity.Title
                                 </header>
                                 <fieldset>
+
+                                    <section>
+                                        <section>
+                                            <label class="checkbox">
+                                                @Html.CheckBox("isProduct", isProduct)
+                                                <i></i>Tin tức sản phẩm
+                                            </label>
+                                        </section>
+                                    </section>
+                                    <section>
+                                        <label>Số thứ tự</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-sort-numeric-asc"></i>
+                                            <input type="number" name="Order" placeholder="Order" value="@entity.Order">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the order</b>
+                                        </label>
+                                    </section>
                                     <section>
                                         <label class="label">Tên</label>
                                         <label class="input">
@@ -179,33 +196,33 @@
                 icon: '/Scripts/plugin/ckeditor/plugins/image/images/image.png'
             });
 
-            var $registerForm = $("#smart-form-register").validate({
+            //var $registerForm = $("#smart-form-register").validate({
 
-                // Rules for form validation
-                rules: {
-                    Name: {
-                        required: true
-                    },
-                    Description: {
-                        required: true
-                    }
-                },
+            //    // Rules for form validation
+            //    rules: {
+            //        Name: {
+            //            required: true
+            //        },
+            //        Description: {
+            //            required: true
+            //        }
+            //    },
 
-                // Messages for form validation
-                messages: {
-                    Name: {
-                        required: 'Please enter name'
-                    },
-                    Description: {
-                        required: 'Please enter description'
-                    }
-                },
+            //    // Messages for form validation
+            //    messages: {
+            //        Name: {
+            //            required: 'Please enter name'
+            //        },
+            //        Description: {
+            //            required: 'Please enter description'
+            //        }
+            //    },
 
-                // Do not change code below
-                errorPlacement: function (error, element) {
-                    error.insertAfter(element.parent());
-                }
-            });
+            //    // Do not change code below
+            //    errorPlacement: function (error, element) {
+            //        error.insertAfter(element.parent());
+            //    }
+            //});
 
 
 

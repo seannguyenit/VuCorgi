@@ -1,13 +1,16 @@
 ﻿@model MainLibrary.Entity.WebCenter.News[]
 
 @{
-    ViewBag.Title = "NewsMain";
+    ViewBag.Title = "ProductMain";
     Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
     string keyword = string.Empty;
     string fromDate = DateTime.Now.AddDays(-15).Date.ToString("dd/MM/yyyy");
     string toDate = DateTime.Now.Date.ToString("dd/MM/yyyy");
     var data = Model ?? new MainLibrary.Entity.WebCenter.News[0];
     //int count = 0;
+
+    string dateFormat = "dd/mm/yy";
+
 }
 <div class="row">
     <article class="col-sm-12">
@@ -26,17 +29,25 @@
                 <div class="navbar-form" role="search">
                     <div class="form-group">
                         <label>From</label>
-                        <input type="text" name="fromDate" id="datepickerFrom" placeholder="From date" class="form-control datepicker" data-dateformat="dd/mm/yy" value="@fromDate">
+                        <input type="text" name="fromDate" id="datepickerFrom" placeholder="From date" class="form-control datepicker" data-dateformat="@dateFormat" value="@fromDate">
                     </div>
                     <div class="form-group">
                         <label>To</label>
-                        <input type="text" name="toDate" id="datepickerTo" placeholder="To date" class="form-control datepicker" data-dateformat="dd/mm/yy" value="@toDate">
+                        <input type="text" name="toDate" id="datepickerTo" placeholder="To date" class="form-control datepicker" data-dateformat="@dateFormat" value="@toDate">
                     </div>
                     <div class="form-group">
-                        <label class="checkbox-inline" style="width: 300px">
-                            @Html.DropDownList("cateId", (IEnumerable<SelectListItem>)(ViewBag.Cate), new { @class = "select2 select2-offscreen", @style = "width:100%", @placeholder = "Select Category" })
-                        </label>
+                        @Html.DropDownList("cateId", (IEnumerable<SelectListItem>)(ViewBag.Cate), new { @class = "select2 select2-offscreen", @style = "width:100%", @placeholder = "Select Category" })
                     </div>
+                    <input id="type" name="type" type="hidden" value="@MainLibrary.Resource.WebCenter.NewsType.Product.ToString()"/>
+                    @*<div class="form-group">
+                        <select class="form-control" id="type" name="type">
+                            <option selected value="">Tất cả các loại</option>
+                            @foreach (var opt in Enum.GetNames(typeof(MainLibrary.Resource.WebCenter.NewsType)))
+                            {
+                                <option value="@opt">@opt</option>
+                            }
+                        </select>
+                    </div>*@
                     <div class="form-group">
                         <input id="inputkeyword" name="keyword" class="form-control" placeholder="Keyword" type="text">
                     </div>
@@ -73,7 +84,7 @@
                     -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>Task</h2>
+                        <h2>Danh sách tin</h2>
                     </header>
                     <!-- widget div-->
                     <div>
@@ -98,7 +109,7 @@
         <div class="row">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div align="right">
-                    <a class="btn btn-sm btn-success" href="@Url.Action("Details",new { type = MainLibrary.Resource.WebCenter.NewsType.News.ToString() })">Create new</a>
+                    <a class="btn btn-sm btn-success" href="@Url.Action("Details",new { type = MainLibrary.Resource.WebCenter.NewsType.Product.ToString() })">Create new</a>
                 </div>
             </article>
         </div>
@@ -115,9 +126,9 @@
             var from = $('#datepickerFrom').val();
             var to = $('#datepickerTo').val();
             var cateId = $('#cateId').val();
-            var type = '@MainLibrary.Resource.WebCenter.NewsType.News.ToString()'
+            var type = $('#type').val();
             $('#mainDataTable').load("@Url.Action("NewsPatialSearch","News")",
-                { keyword: key, isDecline: null, from: from, to: to, cateId: cateId, isEnable: true, type : type });
+                { keyword: key, isDecline: null, from: from, to: to, cateId: cateId, isEnable: true, type: type });
         }
         $(document).ready(function () {
             loadPage();

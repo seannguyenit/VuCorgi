@@ -1,10 +1,10 @@
 ﻿@model MainLibrary.Entity.WebCenter.Category
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Chitiet";
-                Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
+    ViewBag.Title = "Chitiet";
+    Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
 }
 <section id="chitiet">
     <div class="container">
@@ -12,19 +12,42 @@
             <div class="row">
                 <div class="chitiet_contain">
                     <div class="chitiet_title">
-                        @Model.Name
+                        <div class="text-left">@Model.Name</div>
                     </div>
                     <div class="chitiet_description">
-                        @Html.Raw(Model.Description)
+                        <div class="text-left">
+                            @Html.Raw(Model.Description)
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="chitiet_contain">
+                <div class="tintuc_contain">
 
-                    @foreach (var item in Model.Child.Take(10))
+                    @foreach (var item in ViewBag.News)
                     {
-                        <div class="chitiet_relatedPro">
+                        <div class="tintuc_relatedPro">
+                            <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
+                                <img src="@item.FEPath" class="tintucrelatedImg" />
+                            </a>
+                            <div class="tintucrelatedPro_contain">
+                                <div class="tintucrelatedPro_title">
+                                    <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
+                                </div>
+                                <div class="tintuc_description">
+                                    @item.Description
+                                </div>
+                                @*<div class="relatedPro_date">
+                                        @(item.CreatedDate.ToString("dd/MM/yyyy"))
+                                    </div>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="chitiet_contain">
+                    @foreach (var item in ViewBag.Prod)
+                    {
+                        <div class="col-md-4 chitiet_relatedPro">
                             <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
                                 <img src="@item.FEPath" class="relatedImg" />
                             </a>
@@ -35,31 +58,12 @@
                                 <div class="chitiet_description">
                                     @item.Description
                                 </div>
-                                <div class="relatedPro_date">
-                                    @(item.CreatedDate.ToString("dd/MM/yyyy"))
-                                </div>
+                                @*<div class="relatedPro_date">
+                        @(item.CreatedDate.ToString("dd/MM/yyyy"))
+                    </div>*@
                             </div>
                         </div>
                     }
-                    @*@foreach (var item in Model.Child.Where(c => c.Type == MainLibrary.Resource.WebCenter.NewsType.Album.ToString()).Take(3))
-                {
-                    <div class="chitiet_relatedPro">
-                        <a href="#">
-                            <img class="relatedImg" />
-                        </a>
-                        <div class="relatedPro_contain">
-                            <div class="relatedPro_title">
-                                <a href="#">@item.Title</a>
-                            </div>
-                            <div class="relatedPro_description">
-                                @item.Description
-                            </div>
-                            <div class="relatedPro_date">
-                                @item.CreatedDate
-                            </div>
-                        </div>
-                    </div>
-                }*@
                 </div>
             </div>
             <div class="row">
@@ -82,7 +86,7 @@
         //alert('asdasdasdsa')
         //$(document).scrollTop($("#autocroll").offset().top);
         $('html, body').animate({
-            scrollTop: $('#chitiet').offset().top + 600
+            scrollTop: $('#chitiet').offset().top
         }, 800);
     })
 </script>

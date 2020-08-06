@@ -72,7 +72,7 @@ namespace VuBongBongWeb.Controllers.WebCenter
                     ModelState.AddModelError("", "Name is required !");
                     return View("Details", collection);
                 }
-                if (myFile != null && myFile.ContentLength >= (3024 * 1024))
+                if (myFile != null && myFile.ContentLength >= (2024 * 1024))
                 {
                     ModelState.AddModelError("", "File too big !");
                     return View("Details", collection);
@@ -194,17 +194,23 @@ namespace VuBongBongWeb.Controllers.WebCenter
         public ActionResult Chitiet(int id)
         {
             var data = new Category();
+            var news = new List<News>();
+            var prod = new List<News>();
+            string error = string.Empty;
             using (var _manager = new CategoryManager())
             {
-                data = _manager.GetDetailCategory(id, out string error);
+                data = _manager.GetDetailCategory(id, out error);
             }
             if (data != null)
             {
                 using (var repo = new NewsAndAlbumManager())
                 {
-                    data.Child = repo.GetAllNews(string.Empty, null, null, null, out string error, true, cateId: data.Id).ToList();
+                    prod = repo.GetAllNews(string.Empty, null, null, null, out error, true, cateId: data.Id,type:MainLibrary.Resource.WebCenter.NewsType.Product.ToString()).ToList();
+                    news = repo.GetAllNews(string.Empty, null, null, null, out error, true, cateId: data.Id,type:MainLibrary.Resource.WebCenter.NewsType.News.ToString()).ToList();
                 }
             }
+            ViewBag.News = news ?? new List<News>();
+            ViewBag.Prod = prod ?? new List<News>();
             return View(data);
         }
         #endregion

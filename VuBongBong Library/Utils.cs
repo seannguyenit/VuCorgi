@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -447,9 +448,18 @@ namespace Library
         {
             try
             {
+                //CultureInfo provider = CultureInfo.InvariantCulture;
                 if (string.IsNullOrEmpty(strTime))
                 {
-                    return Convert.ToDateTime(strDate);
+                    #region Default Date
+                    var fromDateTemp = DateTime.Today.AddDays(-30);
+                    //Set default datetime is 1 day before
+                    if (!string.IsNullOrWhiteSpace(strDate))
+                    {
+                        DateTime.TryParseExact(strDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fromDateTemp);
+                    }
+                    return fromDateTemp;
+                    #endregion
                 }
                 if (!string.IsNullOrEmpty(strDate) && !string.IsNullOrEmpty(strTime))
                 {

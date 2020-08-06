@@ -51,7 +51,7 @@ namespace VuBongBongWeb.Controllers.WebCenter
         {
             try
             {
-                if (myFile != null && myFile.ContentLength >= (3024 * 1024))
+                if (myFile != null && myFile.ContentLength >= (2024 * 1024))
                 {
                     ModelState.AddModelError("", "File too big !");
                     return View("Details");

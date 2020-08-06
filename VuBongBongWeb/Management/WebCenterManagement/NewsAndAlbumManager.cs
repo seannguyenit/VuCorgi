@@ -169,11 +169,13 @@ namespace VuBongBongWeb.Management.WebCenterManagement
                 oldDt.Title = news.Title;
                 oldDt.Description = news.Description;
                 oldDt.Content = news.Content;
+                oldDt.Order = news.Order;
                 oldDt.CateID = news.CateID;
                 oldDt.IsActive = news.IsActive;
                 oldDt.Description = news.Description;
                 oldDt.UpdatedDate = news.UpdatedDate;
                 oldDt.UpdatedUser = news.UpdatedUser;
+                oldDt.Type = news.Type;
                 oldDt.FileId = news.FileId;
                 _context.Entry(oldDt).State = System.Data.Entity.EntityState.Modified;
                 _context.SaveChanges();
@@ -190,7 +192,7 @@ namespace VuBongBongWeb.Management.WebCenterManagement
         #region Album
 
 
-        public AlbumDetail[] GetAllAlbumDetail(int? id, out string error, bool? isEnable = null,bool? isPin = null)
+        public AlbumDetail[] GetAllAlbumDetail(int? id, out string error, bool? isEnable = null,bool? isPin = false)
         {
             try
             {
@@ -331,6 +333,7 @@ namespace VuBongBongWeb.Management.WebCenterManagement
                 oldDt.UpdatedUser = banner.UpdatedUser;
                 oldDt.IsPin = banner.IsPin;
                 oldDt.FileId = banner.FileId;
+                oldDt.CatId = banner.CatId;
                 //oldDt.Order = banner.Order;
                 _context.Entry(oldDt).State = System.Data.Entity.EntityState.Modified;
                 _context.SaveChanges();

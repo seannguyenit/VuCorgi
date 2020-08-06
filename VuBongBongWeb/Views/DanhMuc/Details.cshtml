@@ -73,6 +73,7 @@
                                         <div class="input">
                                             <textarea id="HTMLstr" name="HTMLstr" class="form-control" rows="5">@entity.Description</textarea>
                                         </div>
+                                        <input id="inputFile" type="file" multiple="multiple" maxlength="5" accept="image/*" style="display:none" />
                                     </section>
                                     <section></section>
 
@@ -106,9 +107,9 @@
                                             <i></i>Hiển thị trên trang chủ
                                         </label>
                                         @*<label class="checkbox">
-                                            @Html.CheckBox("IsShowLibrary", entity.IsShowLibrary)
-                                            <i></i>Hiển thị thư viện ảnh
-                                        </label>*@
+                                                @Html.CheckBox("IsShowLibrary", entity.IsShowLibrary)
+                                                <i></i>Hiển thị thư viện ảnh
+                                            </label>*@
                                         <label class="checkbox">
                                             @Html.CheckBox("IsShowLeft", entity.IsShowLeft)
                                             <i></i>Hiển thị bên trái trang chủ
@@ -143,7 +144,14 @@
 <!-- END MAIN CONTENT -->
 @section pagespecific {
     <script src="/scripts/plugin/ckeditor/ckeditor.js"></script>
+    <script src="/Scripts/JavaHelper/FileManagement.js"></script>
     <script type="text/javascript">
+        $('#inputFile').change(function () {
+            var input = document.getElementById('inputFile');
+            if (input.files !== 'undefined' && input.files !== null && input.files.length !== 0) {
+                    Savefile(input.files, editor, '@Url.Action("Savefile", "Base")');
+                }
+        });
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
         function getFileFunction() {
             var x = document.getElementById("myFile");
@@ -173,7 +181,18 @@
             editor = CKEDITOR.replace('HTMLstr', {
                 height: '380px', startupFocus: true
             });
+            editor.addCommand("insertImageCommand", { // create named command
+                exec: function () {
+                    $('#inputFile').click();
+                }
+            });
 
+            editor.ui.addButton('SuperButton', { // add new button and bind our command
+                label: "Click Insert Image",
+                command: 'insertImageCommand',
+                toolbar: 'insert',
+                icon: '/Scripts/plugin/ckeditor/plugins/image/images/image.png'
+            });
             var $registerForm = $("#smart-form-register").validate({
 
                 // Rules for form validation

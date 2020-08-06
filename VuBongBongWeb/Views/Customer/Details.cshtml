@@ -62,16 +62,12 @@
                                             <b class="tooltip tooltip-bottom-right">Needed to enter the Title</b>
                                         </label>
                                     </section>
-                                    <section>
+                                    <section hidden="hidden">
                                         <label>Nội dung</label>
                                         <div class="form-group">
                                             <textarea name="Content" id="Content" class="form-control" placeholder="Content" rows="5" required="">@entity.Content</textarea>
                                         </div>
-                                        @*<label class="input">
-                                                <i class="icon-append fa fa-info"></i>
-                                                <input type="text" name="Content" placeholder="Content" value="@entity.Content">
-                                                <b class="tooltip tooltip-bottom-right">Needed to enter the Content</b>
-                                            </label>*@
+                                       
                                     </section>
                                     <section>
                                         @*<div class="form-group">
@@ -86,7 +82,7 @@
 
                                     <section>
                                         <img id="imgDes" src="@entity.FEPath" width="200" height="200" />
-                                        <label class="label">170 x 260 (px)</label>
+                                        <label class="label">570 x 260 (px)</label>
                                         <label class="label">File input</label>
                                         <div class="input input-file">
                                             <span class="button"><input id="myFile" accept="image/*" type="file" name="myFile" onchange="getFileFunction()" placeholder="Include some files">Browse</span><input id="fileText" type="text" placeholder="Include some files" readonly="">

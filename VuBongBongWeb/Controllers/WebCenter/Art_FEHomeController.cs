@@ -112,7 +112,7 @@ namespace WebCenter.Controllers.FE
                 {
                     foreach(var i in data)
                     {
-                        i.Child = repo.GetAllNews(string.Empty,null,null,null, out string error, true, cateId:i.Id,type: MainLibrary.Resource.WebCenter.NewsType.News.ToString()).ToList();
+                        i.Child = repo.GetAllNews(string.Empty,null,null,null, out string error, true, cateId:i.Id).ToList();
                     }
                 }
             }

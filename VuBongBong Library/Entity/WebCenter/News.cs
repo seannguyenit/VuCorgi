@@ -26,6 +26,7 @@ namespace MainLibrary.Entity.WebCenter
         public bool? IsActive { get; set; }
         public bool IsDelete { get; set; }
         public int? FileId { get; set; }
+        public int Order { get; set; }
         public int CateID { get; set; }
         public string Content { get; set; }
         [NotMapped]

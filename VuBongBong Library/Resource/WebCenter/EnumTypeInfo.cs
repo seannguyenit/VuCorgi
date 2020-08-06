@@ -41,8 +41,7 @@ namespace MainLibrary.Resource.WebCenter
     public enum NewsType
     {
         News,
-        Album,
-        Prices
+        Product
     }
 
 }

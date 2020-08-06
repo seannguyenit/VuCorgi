@@ -1378,7 +1378,6 @@
     <Content Include="Views\DanhMuc\DanhMucMain.cshtml" />
     <Content Include="Views\DanhMuc\Details.cshtml" />
     <Content Include="Views\DanhMuc\LeftMenu.cshtml" />
-    <Content Include="Views\News\NewsMain.cshtml" />
     <Content Include="Views\News\AlbumMain.cshtml" />
     <Content Include="Views\News\NewsPatialSearch.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
@@ -1399,6 +1398,8 @@
     <Content Include="Views\Customer\Partial_Feedback.cshtml" />
     <Content Include="Views\News\TimKiem.cshtml" />
     <Content Include="Views\Art_FEHome\Workflow.cshtml" />
+    <Content Include="Views\News\ProductMain.cshtml" />
+    <Content Include="Views\News\ImageMain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

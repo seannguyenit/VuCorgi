@@ -23,6 +23,7 @@ namespace MainLibrary.Entity.WebCenter
         public string Title { get; set; }
         public string Description { get; set; }
         //public string TargetUrl { get; set; }
+        public int? CatId { get; set; }
         public int FileId { get; set; }
         public int Order { get; set; }
         public bool IsActive { get; set; }
