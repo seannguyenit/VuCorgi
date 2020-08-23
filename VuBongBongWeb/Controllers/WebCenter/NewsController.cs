@@ -231,7 +231,7 @@ namespace VuBongBongWeb.Controllers.WebCenter
             var data = new News[0];
             using (var _manager = new NewsAndAlbumManager())
             {
-                data = _manager.GetAllNews(keyword, currentUser, fromDate.Value, toDate.Value, out string error, true, cateId, type);
+                data = _manager.GetAllNews(keyword, currentUser, null, toDate.Value, out string error, true, cateId, type);
             }
             ViewBag.Type = type;
             return PartialView(data);

@@ -386,6 +386,7 @@
     <Content Include="Content\FE_Content\images\about_img_1.jpg" />
     <Content Include="Content\FE_Content\images\arrow-left.png" />
     <Content Include="Content\FE_Content\images\arrow-right.png" />
+    <Content Include="Content\FE_Content\images\bg.jpg" />
     <Content Include="Content\FE_Content\images\bg_3.jpg" />
     <Content Include="Content\FE_Content\images\bg_big.jpg" />
     <Content Include="Content\FE_Content\images\bg_big2.jpg" />

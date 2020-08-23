@@ -40,9 +40,11 @@
     <script src="~/Content/FE_Content/js/main.js"></script>
 </head>
 <body data-spy="scroll" data-target="#ftco-navbar" data-offset="200">
-    <div class="fb-customerchat"
+    <div class="fb-customerchat set-size-messenger"
          attribution=setup_tool
          page_id="992539267448139"
+         size="standard"
+         greeting_dialog_display="show"
          theme_color="#ffc300">
     </div>
     <div id="fb-root"></div>
@@ -84,7 +86,7 @@
                                 <div class="div_hotlineAddress">
                                     <div class="p_phoneNumber">0907548764 : Tư Vấn Trang Trí</div>
                                     <div class="p_phoneNumber">0965228084 : Tư Vấn Biểu Diễn</div>
-                                    <div class="p_phoneNumber">48 Bùi Văn Thêm, P9, Gò Vấp</div>
+                                    @*<div class="p_phoneNumber">48 Bùi Văn Thêm, P9, Gò Vấp</div>*@
                                 </div>
                             </div>
                         </div>
@@ -105,12 +107,18 @@
 
             <div class="div_bodycontain">
                 <div class="div_leftcontain">
-                    <div class="container div_leftmenu">
-                        <div id="leftMenu" class="div-left-menu">
+                    <div class="container div_leftmenu div-left-menu">
+                        <div id="leftMenu">
 
                         </div>
                         <div class="div_leftmenu_item">
-                            @{ Html.RenderAction("FacebookPage", "Art_FEHome");}
+                            <div class="fb-page fb-page-cus-size"
+                                 data-href="https://www.facebook.com/Sinhnhatcuabe.giare/"
+                                 data-tabs="timeline"
+                                 data-small-header="false"
+                                 data-adapt-container-width="true"
+                                 data-hide-cover="false"
+                                 data-show-facepile="true"><blockquote cite="https://www.facebook.com/Sinhnhatcuabe.giare/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Sinhnhatcuabe.giare/">Sinhnhatcuabe.com</a></blockquote></div>
                         </div>
 
                         @{ Html.RenderAction("LeftCate", "Art_FEHome");}
@@ -339,6 +347,8 @@
 
     <!-- Your customer chat code -->
 
-    <script async defer src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=332000547442440&autoLogAppEvents=1"></script>
+    <script async defer src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=332000547442440&autoLogAppEvents=1">
+        
+    </script>
 </body>
 </html>

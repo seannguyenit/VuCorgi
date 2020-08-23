@@ -81,6 +81,7 @@
     .div_contact_content {
         width: 100%;
     }
+
     .div_hotlineDetail {
         width: 100% !important;
     }
@@ -141,6 +142,7 @@
         width: 100%;
         height: 100% !important;
     }
+
     .div_feedback_title1 {
         background-color: white;
         width: 100%;
@@ -150,6 +152,7 @@
         font-size: 10px !important;
         /*overflow-y: scroll;*/
     }
+
     .div_feedback_title {
         background-color: white;
         width: 100%;
@@ -490,7 +493,7 @@
 
 
 .chitiet_relatedPro {
-    float:left;
+    float: left;
     display: block;
     /*height: 160px;*/
     /*border: 1px solid cornflowerblue;*/
@@ -602,6 +605,7 @@
     width: 100%;
     height: 100% !important;
 }
+
 .div_feedback_title1 {
     background-color: white;
     width: 100%;
@@ -610,6 +614,7 @@
     overflow: hidden;
     /*overflow-y: scroll;*/
 }
+
 .div_feedback_title {
     background-color: white;
     width: 100%;
@@ -712,6 +717,7 @@
     padding-left: 10px;
     padding-top: 2px;
 }
+
 .div_hotlineDetail {
     width: 37%;
     margin: auto;
@@ -767,6 +773,7 @@
     color: cornflowerblue;
     width: 100%;
 }
+
 .tintuc_contain {
     width: 100%;
     padding: 5px;
@@ -807,23 +814,24 @@
     font-size: 20px;
 }
 
-.tintucrelatedPro_title :hover {
-    color: mediumpurple;
-}
+    .tintucrelatedPro_title :hover {
+        color: mediumpurple;
+    }
 
     .tintucrelatedPro_title > a {
         color: cornflowerblue;
     }
 
-.image-lib{
-    float:left;
-    display:block;
+.image-lib {
+    float: left;
+    display: block;
     margin-top: 20px;
 }
-.image-lib > a > img {
-    width: 100%;
-    height:230px;
-}
+
+    .image-lib > a > img {
+        width: 100%;
+        height: 230px;
+    }
 
 .item-lib > .media {
     height: 250px;
@@ -832,26 +840,13 @@
     width: 270px !important;
 }*/
 
-.div-left-menu {
-    max-height: 600px;
-    overflow-y: scroll;
+
+/*size chat messenger*/
+.set-size-messenger > span > iframe {
+    height: 350px !important;
+    margin-top: 100px !important;
 }
 
-::-webkit-scrollbar {
-    width: 10px;
+.fb-page-cus-size{
+    width: 100%;
 }
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }

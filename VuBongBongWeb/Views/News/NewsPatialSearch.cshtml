@@ -11,6 +11,7 @@
             <th data-class="expand">Số thứ tự</th>
             <th data-hide="phone,tablet">Type</th>
             <th data-hide="phone,tablet">Title</th>
+            <th data-hide="phone,tablet">Hình đại diện</th>
             <th data-hide="phone,tablet">Description</th>
             <th data-hide="phone,tablet">Danh mục</th>
             <th data-hide="phone,tablet">Last Modified</th>
@@ -26,29 +27,30 @@
 
         @foreach (var item in data)
         {
-            <tr id="datarow-@item.Id.ToString()">
-                <td>@(item.Order)</td>
-                <td>@(item.Type)</td>
-                <td>@(item.Title)</td>
-                <td><div class="catchover">@(item.Description)</div></td>
-                <td>@item.CateName</td>
-                <td>@item.LastModified</td>
-                <td>@item.Editer</td>
-                @*<td>@item.Type</td>*@
-                <td>
-                    <a href="@Url.Action("AlbumDetails","News",new { id = item.Id })" class="btn btn-xs btn-info">Danh sách hình</a>
-                    <a class="btn btn-xs btn-info" href="@Url.Action("Details",new {id = item.Id })">Details</a>
-                    @if (item.IsActive ?? true)
-                    {
-                        <a href="#" id="dialog_link-@count" data-itemId="@item.Id" class="btn btn-xs btn-warning">Disable</a>
-                    }
-                    else
-                    {
-                        <a href="#" id="dialog_link-@count" data-itemId="@item.Id" class="btn btn-xs btn-success">Enable</a>
-                    }
-                    <a href="#" id="dialog_delete-@count" data-deleteId="@item.Id" class="btn btn-xs btn-danger">Delete</a>
-                </td>
-            </tr>
+        <tr id="datarow-@item.Id.ToString()">
+            <td>@(item.Order)</td>
+            <td>@(item.Type)</td>
+            <td>@(item.Title)</td>
+            <td><img width="100" height="50" src="@item.FilePath" /></td>
+            <td><div class="catchover">@(item.Description)</div></td>
+            <td>@item.CateName</td>
+            <td>@item.LastModified</td>
+            <td>@item.Editer</td>
+            @*<td>@item.Type</td>*@
+            <td>
+                <a href="@Url.Action("AlbumDetails","News",new { id = item.Id })" class="btn btn-xs btn-info">Danh sách hình</a>
+                <a class="btn btn-xs btn-info" href="@Url.Action("Details",new {id = item.Id })">Details</a>
+                @if (item.IsActive ?? true)
+                {
+                    <a href="#" id="dialog_link-@count" data-itemId="@item.Id" class="btn btn-xs btn-warning">Disable</a>
+                }
+                else
+                {
+                    <a href="#" id="dialog_link-@count" data-itemId="@item.Id" class="btn btn-xs btn-success">Enable</a>
+                }
+                <a href="#" id="dialog_delete-@count" data-deleteId="@item.Id" class="btn btn-xs btn-danger">Delete</a>
+            </td>
+        </tr>
             count++;
         }
 
