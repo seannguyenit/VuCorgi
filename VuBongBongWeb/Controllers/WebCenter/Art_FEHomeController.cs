@@ -34,7 +34,7 @@ namespace WebCenter.Controllers.FE
             {
                 data = _manager.GetAllCategory(string.Empty, out string error, isMainTable: true);
             }
-            return PartialView(data);
+            return PartialView(data.OrderBy(o => o.Order).ToArray());
         }
 
         public ActionResult AboutUs()
@@ -116,7 +116,7 @@ namespace WebCenter.Controllers.FE
                     }
                 }
             }
-            return PartialView(data);
+            return PartialView(data.OrderBy(o => o.Order).ToArray());
         }
 
         public ActionResult LibraryPartial()

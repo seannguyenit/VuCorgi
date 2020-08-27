@@ -40,6 +40,7 @@
 @Scripts.Render("~/scripts/full-calendar")
 
 <!-- DO NOT REMOVE : GLOBAL FUNCTIONS! -->
+@*<script src="~/Content/Script/KeepAlive.js" type="text/javascript"></script>*@
 <script>
     function openHoldOn() {
         HoldOn.open({
@@ -55,6 +56,25 @@
     $(document).ready(function () {
         pageSetUp();
         drawBreadCrumb();
+        async function KeepAlive(url) {
+            $.post(url, function (data) {
+                if (data == 'ok') {
+                    console.log("Keep you alive !");
+                }
+                else {
+                    console.log("Fail to keep you alive !");
+                }
+            });
+        }
+        setInterval(function () {
+            var url = window.location.href;
+            if (url.includes("sinhnhatcuabe.com") && !url.includes("login")) {
+                KeepAlive("www.sinhnhatcuabe.com/Art_Account/lock");
+            }
+            //if (url.includes("http://localhost:61708/") && !url.includes("login")) {
+            //    KeepAlive("http://localhost:61708/Art_Account/lock");
+            //}
+        }, 600000);
     });
 </script>
 

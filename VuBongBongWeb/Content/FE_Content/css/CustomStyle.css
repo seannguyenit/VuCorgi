@@ -848,5 +848,10 @@
 }
 
 .fb-page-cus-size{
-    width: 100%;
+    width: 100% !important;
+}
+
+.footer-bg {
+    background-color: #4a595c;
+    color: #fff;
 }

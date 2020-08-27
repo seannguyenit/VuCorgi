@@ -662,6 +662,7 @@
     <Content Include="Content\img\voicecommand\active-btn.gif" />
     <Content Include="Content\img\vt-menu.png" />
     <Content Include="Content\Script\Custom.security.role.entry.js" />
+    <Content Include="Content\Script\KeepAlive.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\sound\bigbox.mp3" />
     <Content Include="Content\sound\license.txt" />

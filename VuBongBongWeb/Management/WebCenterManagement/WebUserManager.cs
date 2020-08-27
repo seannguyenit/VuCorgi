@@ -234,6 +234,22 @@ namespace VuBongBongWeb.Management.WebCenterManagement
             }
             return false;
         }
+
+        public bool CheckAlive(Guid userId)
+        {
+            try
+            {
+                var dt = _context.User_Sessions.FirstOrDefault(c=>c.UserId == userId && c.User_End > DateTime.Now);
+                if (dt != null)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.GetInnerMessage());
+            }
+            return false;
+        }
+
         public bool CheckOKUsername(string username)
         {
             try

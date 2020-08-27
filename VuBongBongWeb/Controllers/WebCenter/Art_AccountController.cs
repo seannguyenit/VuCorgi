@@ -313,9 +313,25 @@ namespace VuBongBongWeb.Controllers.BE
 
         // GET: /account/lock
         //[AllowAnonymous]
-        public ActionResult Lock()
+        [HttpPost]
+        public JsonResult Lock()
         {
-            return View();
+            var cru = HttpContext.User as WebPrincipal;
+            if (cru == null) return Json("fail");
+            bool check = false;
+            using (var repo = new WebUserManager())
+            {
+                var dt = repo.CheckAlive(cru.UserDetail.UserId);
+                check = dt;
+            }
+            if (check)
+            {
+                return Json("ok");
+            }
+            else
+            {
+                return Json("fail");
+            }
         }
 
         [AllowAnonymous]
