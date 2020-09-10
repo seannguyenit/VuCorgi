@@ -3,11 +3,12 @@
 
 @{
     /**/
-
-    foreach (var item in Model)
-    {
+    <div class="autoHidden">
+        @foreach (var item in Model)
+        {
         <div class="div_leftmenu_item">
             <a href="@Url.Action("Chitiet","DanhMuc",new { id = item.Id })"><img class="imgContact" src="@item.FEPath" /></a>
         </div>
-    }
+        }
+    </div>
 }

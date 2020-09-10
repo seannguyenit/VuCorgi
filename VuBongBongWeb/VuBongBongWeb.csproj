@@ -393,6 +393,7 @@
     <Content Include="Content\FE_Content\images\bg_big3.jpg" />
     <Content Include="Content\FE_Content\images\birth-lst.jpg" />
     <Content Include="Content\FE_Content\images\birth-lst.png" />
+    <Content Include="Content\FE_Content\images\call.png" />
     <Content Include="Content\FE_Content\images\giftIcon.jpg" />
     <Content Include="Content\FE_Content\images\iconSearch.png" />
     <Content Include="Content\FE_Content\images\iconTab.png" />
@@ -411,6 +412,7 @@
     <Content Include="Content\FE_Content\images\step 4.png" />
     <Content Include="Content\FE_Content\images\step 5.png" />
     <Content Include="Content\FE_Content\images\step 6.png" />
+    <Content Include="Content\FE_Content\images\zalo.png" />
     <Content Include="Content\FE_Content\img\clients\01.png" />
     <Content Include="Content\FE_Content\img\clients\02.png" />
     <Content Include="Content\FE_Content\img\clients\03.png" />

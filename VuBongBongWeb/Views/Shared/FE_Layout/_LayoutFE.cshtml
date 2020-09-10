@@ -40,11 +40,11 @@
     <script src="~/Content/FE_Content/js/main.js"></script>
 </head>
 <body data-spy="scroll" data-target="#ftco-navbar" data-offset="200">
-    <div class="fb-customerchat set-size-messenger"
+    <div class="fb-customerchat"
          attribution=setup_tool
          page_id="992539267448139"
          size="standard"
-         greeting_dialog_display="show"
+         greeting_dialog_display="hide"
          theme_color="#ffc300">
     </div>
     <div id="fb-root"></div>
@@ -129,8 +129,9 @@
                         <div id="div_servicetable"></div>
                     </section>
                     <!-- END section -->
-
-                    @RenderBody()
+                    <div id="bodyCT" class="col-md-12">
+                        @RenderBody()
+                    </div>
 
                 </div>
             </div>
@@ -245,8 +246,8 @@
             <footer class="ftco-section footer-bg">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12" style="display: contents;">
-                            <div class="col-4">
+                        <div style="width: 100%;margin:auto;float:left">
+                            <div class="col-md-4" style="float:left">
                                 <span class="text-uppercase font-weight-bold">Giới thiệu:</span>
                                 <br>
                                 <span class="text-info text-uppercase">Sinh nhật của bé</span> là đơn vị thuộc hệ sinh thái <span class="text-warning text-uppercase">Thanh Vũ Group</span>, là đơn vị chuyên tổ chức
@@ -259,7 +260,7 @@
                                 <br>
                                 - Qua đó mang lại sự yên tâm và hài lòng cho khách hàng.
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4" style="float:left">
                                 <span class="text-uppercase font-weight-bold">Thông tin liên hệ :</span>
                                 <br>
                                 <span class="text-info text-uppercase">Địa chỉ:</span>
@@ -270,7 +271,7 @@
                                 <br>
                                 <span class="text-info text-uppercase">Sđt:</span> <a class="text-white" href="phoneto:0907548764">0907.548.764</a> - <a class="text-white" href="phoneto:0965228084">0965.228.084</a>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4" style="float:left">
                                 <span class="text-uppercase font-weight-bold">Hệ thống website thành viên của <span class="text-warning text-uppercase">Thanh Vũ Group</span>:</span>
                                 <br>
                                 <a class="text-info text-uppercase" href="sinhnhatcuabe.com">Sinhnhatcuabe.com:</a> Chuyên trang trí sinh nhật
@@ -278,9 +279,19 @@
                                 <a class="text-info text-uppercase" href="vuabongbong.com">Vuabongbong.com:</a> Chuyên bán phụ kiện trang trí và bong bóng sinh nhật.
                             </div>
                         </div>
-                        <div class="col-12 text-left pt-5">
+                        <div class="text-left pt-5 w-100">
                             <p>&copy; Arthur. All Rights Reserved.  Made with <span class="icon-heart text-danger"></span> by <a href="http://ytuongvagiaiphap.com/">Arthur Idea co.</a></p>
                         </div>
+                    </div>
+                </div>
+                <div class="social-div">
+                    <div class="social-button-content">
+                        <a href="tel:0907548764" class="call-icon" rel="nofollow">
+                            <img src="~/Content/FE_Content/images/call.png" width="50" height="50">
+                        </a>
+                        <a href="http://zalo.me/0907548764" class="zalo">
+                            <img src="~/Content/FE_Content/images/zalo.png" width="50" height="50">
+                        </a>
                     </div>
                 </div>
             </footer>
