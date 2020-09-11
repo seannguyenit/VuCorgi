@@ -429,6 +429,7 @@
     <Content Include="Content\FE_Content\img\LogoMed.png" />
     <Content Include="Content\FE_Content\img\noimg.jpg" />
     <Content Include="Content\FE_Content\img\widgets\gmap-pin.png" />
+    <Content Include="Content\FE_Content\js\autoScroll.js" />
     <Content Include="Content\FE_Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\FE_Content\js\bootstrap.min.js" />
     <Content Include="Content\FE_Content\js\components\gmap.js" />
