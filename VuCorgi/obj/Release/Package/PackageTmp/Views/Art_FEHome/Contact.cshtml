@@ -1,0 +1,52 @@
+﻿@model MainLibrary.Entity.WebCenter.WebInfomation
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
+    HtmlString html = new HtmlString(Model.Description);
+}
+
+
+
+<!-- Pricing -->
+<div class="bg-color-sky-light">
+    <div class="content container">
+        <div class="row">
+            <div class="margin-b-30">
+                <h3><i class="pricing-icon icon-info"> Liên hệ</i></h3>
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            @Html.ValidationBootstrap()
+            <div class="contentHtml">
+                @Html.Raw(html)
+            </div>
+        </div>
+        <hr />
+        <!--// end row -->
+    </div>
+</div>
+
+
+<div class="bg-color-sky-light">
+    <div class="content container">
+        <div id="btShow" class="row">
+            <button class="btn-theme btn-theme-sm btn-base-bg text-uppercase" onclick="showForm()">Gửi tin cho chúng tôi</button>
+        </div>
+        <div class="row">
+            <div id="formSendMessage">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showForm() {
+        $('#btShow').hide(1000);
+        $('#formSendMessage').show(1000);
+    }
+    $(document).ready(function () {
+        $('#formSendMessage').load('@Url.Action("PartialMessage","Customer")');
+        $('#formSendMessage').hide();
+    })
+</script>

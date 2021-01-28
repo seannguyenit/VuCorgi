@@ -1,0 +1,155 @@
+﻿@model MainLibrary.Entity.WebCenter.TaskWeb
+
+<div id="mainPartial">
+    <div class="divModal modal-body">
+
+
+        <div class="widget-body">
+            <hr class="simple">
+            <ul id="myTab3" class="nav nav-tabs tabs-pull-left bordered">
+                <li class="active">
+                    <a href="#l1" data-toggle="tab">Task details</a>
+                </li>
+                <li class="pull-left">
+                    <a href="#l2" data-toggle="tab">TimeLog</a>
+                </li>
+            </ul>
+            <div id="myTabContent3" class="tab-content padding-10">
+                <div class="tab-pane fade in active" id="l1">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td>@Model.Name</td>
+                            </tr>
+                            <tr>
+                                <td>Description:</td>
+                                <td>@Model.Description</td>
+                            </tr>
+                            <tr>
+                                <td>Executor:</td>
+                                <td>@Model.ExecutorName</td>
+                            </tr>
+                            <tr>
+                                <td>Status:</td>
+                                <td>@Model.Status</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline:</td>
+                                <td>@Model.Deadline</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div>
+                                        @if (Model.StatusId == null || Model.StatusId == 1 || Model.StatusId == 5)
+                                        {
+                                            @*<a href="#" onclick="buttonClick('Start')" class="btn btn-sm btn-success">Start</a>*@
+                                            <button type="button" onclick="buttonClick('Start')" class="btn btn-labeled btn-success">
+                                                <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Start
+                                            </button>
+                                        }
+                                        @if (Model.StatusId == 3)
+                                        {
+                                            @*<a href="#" onclick="buttonClick('Resume')" class="btn btn-sm btn-success">Resume</a>*@
+                                            <button type="button" onclick="buttonClick('Resume')" class="btn btn-labeled btn-success">
+                                                <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>Resume
+                                            </button>
+                                        }
+                                        @if (Model.StatusId == 2)
+                                        {
+                                            @*<a href="#" onclick="buttonClick('Pause')" class="btn btn-sm btn-danger">Pause</a>*@
+                                            <button type="button" onclick="buttonClick('Pause')" class="btn btn-labeled btn-danger">
+                                                <span class="btn-label"><i class="glyphicon glyphicon-pause"></i></span>Pause
+                                            </button>
+                                        }
+                                        @if (Model.StatusId != 1 && Model.StatusId != 5)
+                                        {
+                                            @*<a href="#" onclick="buttonClick('Start')" class="btn btn-sm btn-success">Start</a>*@
+                                            <button type="button" onclick="buttonClick('Finish')" class="btn btn-labeled btn-success">
+                                                <span class="btn-label"><i class="glyphicon glyphicon-ok-circle"></i></span>Finish
+                                            </button>
+                                        }
+                                        @*<a href="#" class="btn btn-sm btn-warning">Cancel</a>*@
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="tab-pane fade" id="l2">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">From time</th>
+                                <th style="text-align:center">To time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListDetails)
+                            {
+                                <tr>
+                                    <td>@item.FromTime</td>
+                                    <td>@item.ToTime</td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="2" style="text-align:center">
+                                    Duration: <span>@Model.Duration</span> minutes
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function buttonClick(type) {
+        if (type === "Start") {
+            $.post("@Url.Action("TaskAction")", { taskId: @Model.Id, status: '@MainLibrary.Resource.WebCenter.TaskStatus.New.ToString()' }, function (data) {
+                if (data == 'Success') {
+                    $('#mainPartial').load("/Task/PartialTaskDetail",
+                        { taskId: @Model.Id });
+                                }
+                                else {
+                                    alert(data)
+                                }
+                            });
+        } else if (type === "Resume") {
+            $.post("@Url.Action("TaskAction")", { taskId: @Model.Id, status: '@MainLibrary.Resource.WebCenter.TaskStatus.Pending.ToString()' }, function (data) {
+                if (data == 'Success') {
+                    $('#mainPartial').load("/Task/PartialTaskDetail",
+                        { taskId: @Model.Id });
+                                }
+                                else {
+                                    alert(data)
+                                }
+                            });
+        } else if (type === "Pause") {
+            $.post("@Url.Action("TaskAction")", { taskId: @Model.Id, status: '@MainLibrary.Resource.WebCenter.TaskStatus.Working.ToString()' }, function (data) {
+                if (data == 'Success') {
+                    $('#mainPartial').load("/Task/PartialTaskDetail",
+                        { taskId: @Model.Id });
+                                }
+                                else {
+                                    alert(data)
+                                }
+                            });
+        }else if (type === "Finish") {
+            $.post("@Url.Action("TaskAction")", { taskId: @Model.Id, status: '@MainLibrary.Resource.WebCenter.TaskStatus.Finished.ToString()' }, function (data) {
+                if (data == 'Success') {
+                    $('#mainPartial').load("/Task/PartialTaskDetail",
+                        { taskId: @Model.Id });
+                                }
+                                else {
+                                    alert(data)
+                                }
+                            });
+        }
+    }
+    //$(document).ready(function () {
+
+    //}
+</script>

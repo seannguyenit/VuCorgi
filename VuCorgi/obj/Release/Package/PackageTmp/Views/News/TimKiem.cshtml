@@ -1,0 +1,75 @@
+﻿@model MainLibrary.Entity.WebCenter.News[]
+
+@{
+    ViewBag.Title = "TimKiem";
+    Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
+}
+
+<section id="chitiet">
+    <div class="container">
+        <div class="col-md-12 col-lg-12">
+            <div class="row">
+                <div class="chitiet_contain">
+
+                    @if (Model == null || Model.Length == 0)
+                    {
+                        <div class="chitiet_title">
+                            Không tìm thấy kết quả nào với từ khóa mà bạn nhập.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="chitiet_title">
+                            Các kết quả được tìm thấy
+                        </div>
+                    }
+
+                    <table class="table table-bordered">
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="chitiet_relatedPro">
+                                            <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
+                                                <img src="@item.FEPath" class="relatedImg" />
+                                            </a>
+                                            <div class="relatedPro_contain">
+                                                <div class="relatedPro_title">
+                                                    <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
+                                                </div>
+                                                <div class="chitiet_description">
+                                                    @item.Description
+                                                </div>
+                                                <div class="relatedPro_date">
+                                                    @(item.CreatedDate.ToString("dd/MM/yyyy"))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>*@
+<script type="text/javascript" src="~/Content/FE_Content/js/paginathing.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //alert('asdasdasdsa')
+        //$(document).scrollTop($("#autocroll").offset().top);
+        $('.table tbody').paginathing({
+            perPage: 6,
+            insertAfter: '.table',
+            pageNumbers: true,
+            containerClass: 'pagination-container',
+        });
+        $('html, body').animate({
+            scrollTop: $('#chitiet').offset().top + 600
+        }, 800);
+    })
+</script>

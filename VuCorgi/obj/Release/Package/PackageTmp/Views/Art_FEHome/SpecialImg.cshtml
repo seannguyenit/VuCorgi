@@ -1,0 +1,24 @@
+﻿@model MainLibrary.Entity.WebCenter.AlbumDetail[]
+
+<div class="container">
+    <div class="row ftco-custom-gutters">
+        <div class="col-md-12 text-center mb-5 ftco-animate">
+            <h2 class="display-4">Hình ảnh nổi bật</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-7">
+                    <p class="lead">Tổng hợp các mẫu trang trí được khách chọn nhiều nhất trong thời gian qua.</p>
+                </div>
+            </div>
+        </div>
+        <marquee truespeed="60" spellcheck="true">
+            <div style="display:inline-flex">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <div class="col-md-4 ftco-animate divImg div_slideImg"> <a href="@item.FEPath" class="ftco-thumbnail image-popup"> <img src="@item.FEPath" alt="@item.Title" class="img-fluid"> </a> <span> @item.Title </span> </div>
+                    }
+                }
+            </div>
+        </marquee>
+    </div>
+</div>

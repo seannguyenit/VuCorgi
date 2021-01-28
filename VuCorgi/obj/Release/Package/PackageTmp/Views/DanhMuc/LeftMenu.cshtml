@@ -1,0 +1,30 @@
+﻿@model Dictionary<Category, Category[]>
+
+
+
+@{ Html.RenderAction("ContactImg", "Art_FEHome");}
+
+@{
+    foreach (var item in Model)
+    {
+        <div class="div_leftmenu_item">
+            <div class="div_leftmenu_title">
+                <a>@item.Key.Name</a>
+            </div>
+            <div class="div_leftmenu_child">
+                <ul>
+                    @{
+                        foreach (var li in item.Value)
+                        {
+                            <li><img src="~/Content/FE_Content/images/birth-lst.png" alt="icontitle" width="14" height="15"/><a href="@Url.Action("Chitiet","DanhMuc",new { id = li.Id })">@li.Name</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+}
+
+
+
+

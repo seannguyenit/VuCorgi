@@ -1,0 +1,84 @@
+﻿@model MainLibrary.Entity.WebCenter.Category
+
+@{
+    /**/
+
+    ViewBag.Title = "Chitiet";
+    Layout = "~/Views/Shared/FE_Layout/_LayoutFE.cshtml";
+}
+<section id="chitiet">
+    <div class="container">
+        <div class="col-md-12 col-lg-12">
+            <div class="row">
+                <div class="chitiet_contain">
+                    <div class="chitiet_title">
+                        <div class="text-left">@Model.Name</div>
+                    </div>
+                    <div class="chitiet_description">
+                        <div class="text-left">
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="tintuc_contain">
+
+                    @foreach (var item in ViewBag.News)
+                    {
+                        <div class="tintuc_relatedPro">
+                            <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
+                                <img src="@item.FEPath" class="tintucrelatedImg" />
+                            </a>
+                            <div class="tintucrelatedPro_contain">
+                                <div class="tintucrelatedPro_title">
+                                    <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
+                                </div>
+                                <div class="tintuc_description">
+                                    @item.Description
+                                </div>
+                                @*<div class="relatedPro_date">
+                                        @(item.CreatedDate.ToString("dd/MM/yyyy"))
+                                    </div>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="chitiet_contain">
+                    @foreach (var item in ViewBag.Prod)
+                    {
+                        <div class="col-md-4 chitiet_relatedPro">
+                            <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">
+                                <img src="@item.FEPath" class="relatedImg" />
+                            </a>
+                            <div class="relatedPro_contain">
+                                <div class="relatedPro_title">
+                                    <a href="@Url.Action("Chitiet", "News", new { id = item.Id })">@item.Title</a>
+                                </div>
+                                <div class="chitiet_description">
+                                    @item.Description
+                                </div>
+                                @*<div class="relatedPro_date">
+                        @(item.CreatedDate.ToString("dd/MM/yyyy"))
+                    </div>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="chitiet_contain">
+                    <div class="fb-like" data-href="@HttpContext.Current.Request.Url.AbsoluteUri" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="chitiet_contain">
+                    @*<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>*@
+                    <div class="fb-comments" data-width="100%" data-href="@HttpContext.Current.Request.Url.AbsoluteUri" data-numposts="10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/Content/FE_Content/js/autoScroll.js" async defer></script>

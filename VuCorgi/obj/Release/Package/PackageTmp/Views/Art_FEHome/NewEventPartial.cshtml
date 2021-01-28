@@ -1,0 +1,49 @@
+﻿@model MainLibrary.Entity.WebCenter.Category[]
+
+@{
+    var entity = Model ?? new Category[0];
+}
+@{
+    foreach (var item in Model)
+    {
+        <section class="bg-light" id="section-@item.Id.ToString()">
+            <div class="container">
+                <div class="row div_event">
+                    <div class="col-md-12 text-center mb-5 ftco-animate">
+                        @*<h4 class="ftco-sub-title">Sự kiện vừa mới hoàn thành</h4>*@
+                        <h2 class="display-4"> @item.Name </h2>
+                        <div class="row justify-content-center">
+                            <div class="col-md-7">
+                                <p class="lead"> @Html.Raw(item.Description) </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="owl-carousel ftco-owl">
+                            @{
+                                foreach (var i in item.Child)
+                                {
+                                    <div class="item containerService">
+                                        <!--            <div>-->
+                                        <div class="media d-block mb-4 text-center ftco-media ftco-animate border-0">
+                                            <img src="@i.FEPath" alt="@i.Title" class="img-fluid">
+                                            <div class="media-body p-md-5 p-4">
+                                                <!--                    <h5 class="text-primary">$00.50</h5>-->
+                                                <h5 class="mt-0 h4"> @i.Title </h5>
+                                                <p class="mb-4"> @Html.Raw(i.Description) </p>
+                                            </div>
+                                        </div>
+                                        <!--            </div>-->
+                                        <div class="overlayService">
+                                            <p class="mb-0"><a href="@Url.Action("Chitiet","News",new { id = i.Id})" class="btn btn-primary btn-sm textService">Chi tiết</a></p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}

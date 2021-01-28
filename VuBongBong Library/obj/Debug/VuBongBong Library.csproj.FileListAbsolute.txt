@@ -1,0 +1,13 @@
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\VuBongBong Library.dll.config
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\VuBongBong Library.dll
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\VuBongBong Library.pdb
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\EntityFramework.SqlServer.dll
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\EntityFramework.dll
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\log4net.dll
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\Newtonsoft.Json.dll
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\bin\Debug\Newtonsoft.Json.pdb
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\obj\Debug\VuBongBong Library.csproj.CoreCompileInputs.cache
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\obj\Debug\VuBongBong Library.csproj.CopyComplete
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\obj\Debug\VuBongBong Library.dll
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\obj\Debug\VuBongBong Library.pdb
+D:\Soft\Project\Working\VuBongBong\VuBongBongWeb\VuBongBong Library\obj\Debug\VuBongBong Library.csprojAssemblyReference.cache

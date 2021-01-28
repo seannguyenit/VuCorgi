@@ -1,0 +1,22 @@
+﻿@model AccountRegistrationModel
+@{
+    ViewBag.PageId = "extr-page";
+    ViewBag.PageClass = "animated fadeInDown";
+    ViewBag.Title = "RegisterCompleted";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+
+@section topright{
+    <span id="extr-page-header-space"> <span class="hidden-mobile">Bạn đã đăng ký ?</span> <a href="@Url.Action("login", "Art_account")" class="btn btn-danger">Đăng nhập</a> </span>
+}
+
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well no-padding">
+                <h2>Bạn đã đăng ký thành công ! <br /> Vui lòng kiểm tra hộp thư email của bạn để kích hoạt tài khoản đăng nhập. Click vào <a href="@Url.Action("Login","Art_Account")">đây</a> để đến trang đăng nhập.</h2>
+            </div>
+        </div>
+    </div>
+</div>
+

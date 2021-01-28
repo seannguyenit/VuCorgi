@@ -1,0 +1,278 @@
+﻿@model MainLibrary.Entity.WebCenter.WebInfomation[]
+
+@{
+
+    ViewBag.Title = "AllInfo";
+    Layout = "~/Views/Shared/BE_Layout/_LayoutBE.cshtml";
+    var data = Model;
+    int count = 0;
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                    <!-- widget options:
+    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+    data-widget-colorbutton="false"
+    data-widget-editbutton="false"
+    data-widget-togglebutton="false"
+    data-widget-deletebutton="false"
+    data-widget-fullscreenbutton="false"
+    data-widget-custombutton="false"
+    data-widget-collapsed="true"
+    data-widget-sortable="false"
+
+    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Danh sách</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th data-hide="phone">Tên loại</th>
+                                        <th>Hình đại diện</th>
+                                        <th>Mô tả</th>
+                                        <th data-hide="phone,tablet">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in data)
+                                    {
+                                        <tr id="datarow-@item.Id.ToString()">
+                                            <td>@(item.Type == MainLibrary.Resource.WebCenter.EnumTypeInfo.ContactImg.ToString() ? "Hình ảnh liên hệ" : item.Type)</td>
+                                            <td><img width="100" height="50" src="@item.FilePath" /></td>
+                                            <td>@(item.Description.Length > 30 ? string.Concat(item.Description.Substring(0, 30), " ...") : item.Description)</td>
+                                            <td>
+                                                <a class="btn btn-xs btn-info" href="@Url.Action("Details",new {type = item.Type })">Details</a>
+                                            </td>
+                                        </tr>
+                                        count++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- ui-dialog -->
+<div id="dialog_simple" title="Dialog Simple Title">
+    Beware! Your action will be saved !
+</div>
+<!-- END MAIN CONTENT -->
+@section pagespecific {
+    <script type="text/javascript">
+        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        var selectedId = 0;
+        var deleteMode = false;
+        for (var i = 0; i < @data.Length; i++) {
+                $('#dialog_link-' + i.toString()).click(function () {
+                    $('#dialog_simple').dialog('open');
+                    selectedId = $(this).data('itemid');
+                    return false;
+                });
+                $('#dialog_delete-' + i.toString()).click(function () {
+                    deleteMode = true;
+                    $('#dialog_simple').dialog('open');
+                    selectedId = $(this).data('deleteid');
+                    return false;
+                });
+        };
+
+        function ChangeStatus() {
+            var allItem = document.querySelectorAll('[data-ItemId]');
+            allItem.forEach(function (it) {
+                if ($(it).data('itemid') == selectedId) {
+                    if ($(it).text() == 'Disable') {
+                        $(it).text('Enable');
+                        $(it).switchClass('btn-warning', 'btn-success');
+                    } else {
+                        $(it).text('Disable');
+                        $(it).switchClass('btn-success', 'btn-warning');
+                    }
+                };
+            });
+        };
+
+        function DeleteRow() {
+            document.getElementById('datarow-' + selectedId.toString()).remove();
+        };
+
+        $(document).ready(function () {
+            $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+                _title: function (title) {
+                    if (!this.options.title) {
+                        title.html("&#160;");
+                    } else {
+                        title.html(this.options.title);
+                    }
+                }
+            }));
+
+            // Dialog click
+
+
+            $('#dialog_simple').dialog({
+                autoOpen: false,
+                width: 600,
+                resizable: false,
+                modal: true,
+                title: "<div class='widget-header'><h4><i class='fa fa-warning'></i> Are you sure?</h4></div>",
+                buttons: [{
+                    html: "<i class='fa fa-warning'></i>&nbsp; Yes",
+                    "class": "btn btn-danger",
+                    click: function () {
+                        if (deleteMode == false) {
+                            $.post("@Url.Action("ChangeStatus")", { id: selectedId }, function (data) {
+                                if (data == 'Success') {
+                                    ChangeStatus();
+                                }
+                                else {
+                                    alert('Wrong permission !')
+                                }
+                            });
+                        } else {
+                             $.post("@Url.Action("Delete")", { id: selectedId }, function (data) {
+                                if (data == 'Success') {
+                                    DeleteRow();
+                                }
+                                else {
+                                    alert('Wrong permission !')
+                                }
+                            });
+                        }
+                        $(this).dialog("close");
+                    }
+                }, {
+                    html: "<i class='fa fa-times'></i>&nbsp; Cancel",
+                    "class": "btn btn-default",
+                        click: function () {
+                            selectedId = 0;
+                            deleteMode = false;
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+
+            /*
+
+                /* // DOM Position key index //
+
+                l - Length changing (dropdown)
+                f - Filtering input (search)
+                t - The Table! (datatable)
+                i - Information (records)
+                p - Pagination (paging)
+                r - pRocessing
+                < and > - div elements
+                <"#id" and > - div with an id
+                <"class" and > - div with a class
+                <"#id.class" and > - div with an id and class
+
+                Also see: http://legacy.datatables.net/usage/features
+                */
+
+            /* BASIC ;*/
+            var responsiveHelper_dt_basic = undefined;
+            //var responsiveHelper_datatable_fixed_column = undefined;
+            //var responsiveHelper_datatable_col_reorder = undefined;
+            var responsiveHelper_datatable_tabletools = undefined;
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+
+            $('#dt_basic').dataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_dt_basic) {
+                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function (nRow) {
+                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                },
+                "drawCallback": function (oSettings) {
+                    responsiveHelper_dt_basic.respond();
+                }
+            });
+
+            /* END BASIC */
+
+            /* TABLETOOLS */
+            $('#datatable_tabletools').dataTable({
+
+                // Tabletools options:
+                //   https://datatables.net/extensions/tabletools/button_options
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                "oTableTools": {
+                    "aButtons": [
+                        "copy",
+                        "csv",
+                        "xls",
+                        {
+                            "sExtends": "pdf",
+                            "sTitle": "SmartAdmin_PDF",
+                            "sPdfMessage": "SmartAdmin PDF Export",
+                            "sPdfSize": "letter"
+                        },
+                        {
+                            "sExtends": "print",
+                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                        }
+                    ],
+                    "sSwfPath": "/Scripts/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+                },
+                "autoWidth": true,
+                "preDrawCallback": function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_datatable_tabletools) {
+                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function (nRow) {
+                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                },
+                "drawCallback": function (oSettings) {
+                    responsiveHelper_datatable_tabletools.respond();
+                }
+            });
+
+            /* END TABLETOOLS */
+
+        })</script>
+}
