@@ -34,7 +34,7 @@ namespace VuBongBongWeb.Management.WebCenterManagement
                     if (data.FileId.HasValue && data.FileId.Value != 0)
                     {
                         string folder = Settings.FilePath;
-                        string path = _context.FileManagements.FirstOrDefault(c => c.Id == data.FileId.Value).Path;
+                        string path = _context.FileManagements.FirstOrDefault(c => c.Id == data.FileId.Value)?.Path;
                         data.FilePath = folder + path;
                     }
                 }

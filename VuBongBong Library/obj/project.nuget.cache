@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Mn0JKoqQT1jIEsfQfaGcwQ2Oue51hWiK52qQkjgBKs4+FzXqqWViyOCdIxpEBC8817HqrXXaRqkdYW+RzhvldA==",
+  "dgSpecHash": "X/Mv5wV3rjfnbsU9gIx1VpqElVPO9CeZETS/hLOVwNmoDOeGlGSLyRG1Twv6dEP6ABOxx0eXM02aYb6eyqVWCQ==",
   "success": true,
-  "projectFilePath": "D:\\Soft\\Project\\Working\\VuBongBong\\VuBongBongWeb\\VuBongBong Library\\VuBongBong Library.csproj",
+  "projectFilePath": "D:\\Soft\\Project\\Working\\VuCorgi\\VuCorgi\\VuBongBong Library\\VuBongBong Library.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\log4net\\2.0.8\\log4net.2.0.8.nupkg.sha512",

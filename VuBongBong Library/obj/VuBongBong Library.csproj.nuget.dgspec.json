@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Soft\\Project\\Working\\VuBongBong\\VuBongBongWeb\\VuBongBong Library\\VuBongBong Library.csproj": {}
+    "D:\\Soft\\Project\\Working\\VuCorgi\\VuCorgi\\VuBongBong Library\\VuBongBong Library.csproj": {}
   },
   "projects": {
-    "D:\\Soft\\Project\\Working\\VuBongBong\\VuBongBongWeb\\VuBongBong Library\\VuBongBong Library.csproj": {
+    "D:\\Soft\\Project\\Working\\VuCorgi\\VuCorgi\\VuBongBong Library\\VuBongBong Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Soft\\Project\\Working\\VuBongBong\\VuBongBongWeb\\VuBongBong Library\\VuBongBong Library.csproj",
+        "projectUniqueName": "D:\\Soft\\Project\\Working\\VuCorgi\\VuCorgi\\VuBongBong Library\\VuBongBong Library.csproj",
         "projectName": "VuBongBong Library",
-        "projectPath": "D:\\Soft\\Project\\Working\\VuBongBong\\VuBongBongWeb\\VuBongBong Library\\VuBongBong Library.csproj",
+        "projectPath": "D:\\Soft\\Project\\Working\\VuCorgi\\VuCorgi\\VuBongBong Library\\VuBongBong Library.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "D:\\Soft\\Project\\Working\\VuBongBong\\VuBongBongWeb\\VuBongBong Library\\obj\\",
+        "outputPath": "D:\\Soft\\Project\\Working\\VuCorgi\\VuCorgi\\VuBongBong Library\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
